@@ -1,0 +1,33 @@
+{
+	"oi cpp template": {
+		"prefix": "oi-cpp",
+		"description": "cpp template for OI",
+		"body": [
+			"/******************************************************************************",
+			"* Filename: $TM_FILENAME",
+			"* Problem: ${1}",
+			"*****************************************************************************/",
+			"#include <algorithm>",
+			"#include <iostream>",
+			"#include <string>",
+			"#include <vector>",
+			"#include <cstring>",
+			"",
+			"using namespace std;",
+			"",
+			"using ll = long long;",
+			"",
+			"const int kMaxN = 1e${2:5};",
+			"",
+			"int main() {",
+			"\tstd::ios::sync_with_stdio(false);",
+			"\tstd::cin.tie(0);",
+			"",
+			"\t$0",
+			"",
+			"\treturn 0;",
+			"}"
+		]
+	}
+}
+

@@ -1,0 +1,38 @@
+# ~/.config/nvim/.gitignore
+
+# 插件管理器目录（如 lazy.nvim、packer 等）
+#/lazy-lock.json       # lazy.nvim 的锁文件
+#/packer_compiled.lua  # packer.nvim 的编译文件
+#/plugin/packer_compiled.lua
+
+# 插件安装目录（所有插件文件）
+#~/.local/share/nvim/lazy/  # lazy.nvim 默认路径
+#~/.local/share/nvim/site/pack/  # 其他插件管理器
+
+# 运行时缓存和临时文件
+#~/.cache/nvim/
+#~/.local/state/nvim/
+*.swp
+*.swo
+*.un~
+*.log
+*~
+
+# 语言服务器和调试器缓存
+#/lsp-logs/
+#*.dSYM/  # macOS 调试符号
+
+# 会话和备份文件
+Session.vim
+*.backup
+*.tmp
+tmp*
+
+# 本地测试文件
+/test/
+/tmp/
+
+# 可选：个人本地覆盖配置（如机器特定设置）
+/lua/local.lua
+/lua/local.vim
+
