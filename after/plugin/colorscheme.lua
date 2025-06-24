@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 		hi(0, 'LineNr', {fg = C:getcolor('ql_black'), bg = C:getcolor('ql_verylightgrey')})
 		hi(0, 'SignColumn', {bg = C:getcolor('ql_lightgrey')})
 		hi(0, 'DiagnosticSignError', {bold = true, fg = '#cc0000', bg = C:getcolor('ql_lightgrey')})
-		hi(0, 'DiagnosticSignWarn', {bold = true, fg = '#ca7682', bg = C:getcolor('ql_lightgrey')})
+		hi(0, 'DiagnosticSignWarn', {bold = true, fg = '#ca7602', bg = C:getcolor('ql_lightgrey')})
 		hi(0, 'DiagnosticSignInfo', {bold = true, fg = '#448c27', bg = C:getcolor('ql_lightgrey')})
 		hi(0, 'DiagnosticSignHint', {bold = true, fg = '#a1a8b1', bg = C:getcolor('ql_lightgrey')})
 		hi(0, 'DiagnosticSignOk', {bold = true, fg = 'NvimDarkGreen', bg = C:getcolor('ql_lightgrey')})
@@ -32,16 +32,21 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 		-- 浮动窗口
 		hi(0, 'NormalFloat', {fg = C:getcolor('ql_black'), bg = C:getcolor('ql_lightgrey')})
 		hi(0, 'Pmenu', {link = 'NormalFloat'})
+		hi(0, 'PmenuSel', {fg = C:getcolor('ql_black'), bg = C:getcolor('ql_lightpurple')})
 		hi(0, 'PmenuMatch', {bold = true, fg = C:getcolor('ql_red')})
 		--hi(0, 'PmenuMatchSel', {bg = C:getcolor('ql_lightgrey')})
-		hi(0, 'PmenuMatchSel', {bg = C:getcolor('ql_lightgrey')})
+		-- 编程语言
+		hi(0, 'Exception', {fg = C:getcolor('ql_brighter_red')})
+		hi(0, '@type.builtin', {fg = C:getcolor('ql_brighter_red')})
+		hi(0, '@parameter', {fg = C:getcolor('ql_orange')}) -- 被 @property.json link
 		-- 错误, 警告
 		hi(0, 'WarningMsg', {fg = C:getcolor('warning_yellow')})
 		-- LSP
-		-- 浅绿: #c1f5b0 (原来设为 fg 的颜色)
+		-- Signature 对当前参数的高亮, 改为更显眼的红色
 		hi(0, 'LspReferenceRead', {bg = C:getcolor('ql_lightpurple')})
 		hi(0, 'LspReferenceText', {bg = C:getcolor('ql_lightpurple')})
 		hi(0, 'LspReferenceWrite', {bg = C:getcolor('ql_lightpurple')})
+		hi(0, 'LspSignatureActiveParameter', {bg = C:getcolor('ql_lightpurple')})
 		-- quickfix
 		hi(0, 'qfLineNr', {fg = C:getcolor('warning_yellow')})
 	end

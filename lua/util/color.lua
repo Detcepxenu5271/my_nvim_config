@@ -13,13 +13,17 @@ M.colornames = {
 	ql_lightpurple = '#c4b7d7',
 	ql_darkpurple = '#705697',
 	ql_green = '#448c27',
-	ql_lightgreen = '#e4f6d4',
+	ql_lightgreen = '#c1f5b0',
+	ql_verylightgreen = '#e4f6d4',
 	ql_red = '#aa3731',
 	ql_blue = '#4b69c6',
-	ql_orange = '#d18a2e',
+	ql_orange = '#ab6526',
+	ql_brighter_red = '#c4453f', -- brighter red_50
+	ql_brighter_orange = '#d18a2e', -- brighter orange_0
 	-- others
 	highlight_yellow = '#f0c674',
-	warning_yellow = '#ff922b',
+	warning_yellow = '#ca7602',
+	--warning_yellow = '#ff922b',
 	folded_green = '#c4d6b4'
 }
 

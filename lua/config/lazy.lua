@@ -33,7 +33,8 @@ require("lazy").setup({
 		{ import = "plugin" },
 	},
 	git = {
-		url_format = "git@github.com:%s.git"
+		url_format = "git@github.com:%s.git",
+		--allow_local_modifications = true, -- AI 推荐的配置, 不知道是否存在
 	},
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.

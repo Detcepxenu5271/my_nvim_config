@@ -1,18 +1,22 @@
 vim.lsp.enable('lua-ls')
 vim.lsp.enable('clangd')
 vim.lsp.enable('vimls')
+vim.lsp.enable('jsonls')
+vim.lsp.enable('pico8_ls')
 
-vim.keymap.set('n', 'grd', vim.lsp.buf.definition)
+local lsp_attach = vim.api.nvim_create_augroup('lsp-attach', {clear = true})
 
--- ======== highlight ========
-
--- 引入自定义颜色模块
-local C = require('util.color')
--- 自定义高亮的简写
-local hi = vim.api.nvim_set_hl
-
--- Signature 对当前参数的高亮, 改为更显眼的红色
-hi(0, 'LspSignatureActiveParameter', {fg = C:getcolor('ql_red')})
+-- from: https://github.com/patricorgi/dotfiles/blob/main/.config/nvim/lua/custom/lsp.lua
+vim.api.nvim_create_autocmd('LspAttach', {
+	group = lsp_attach,
+	callback = function (event)
+		-- obtain LSP client
+		-- (Why and why cli
+		--local client = vim.lsp.get_client_by_id(event.data.client_id)
+		vim.keymap.set('n', 'grd', vim.lsp.buf.definition, {buffer = true})
+		vim.keymap.set('n', 'grD', vim.lsp.buf.declaration, {buffer = true})
+	end
+})
 
 -- ======== 其他 ========
 

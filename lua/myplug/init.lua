@@ -9,4 +9,5 @@ vim.cmd('source '..myplug_path..'/statusline.vim')
 vim.cmd('source '..myplug_path..'/tabline.vim')
 vim.cmd('source '..myplug_path..'/mode_status.lua')
 
-vim.cmd('source '..myplug_path..'/workspace.lua')
+vim.cmd('source '..myplug_path..'/workspace-vim_compatible.lua')
+

@@ -90,7 +90,7 @@ opt.undofile = true
 
 -- session 文件
 -- 不包括 buffers 选项, 只记录当前打开的 buffer
---opt.sessionoptions:remove('buffers')
+opt.sessionoptions:remove('buffers')
 
 -- ======== 命 令 行 (cmdline) ========
 

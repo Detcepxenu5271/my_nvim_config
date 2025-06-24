@@ -1,5 +1,8 @@
 return {
 	'saghen/blink.cmp',
+
+	event = 'VeryLazy',
+
 	-- optional: provides snippets for the snippet source
 	dependencies = { 'rafamadriz/friendly-snippets' },
 
@@ -27,17 +30,25 @@ return {
 		-- See :h blink-cmp-config-keymap for defining your own keymap
 		keymap = {
 			preset = 'default',
+			-- my keymap:
+			-- Tab to select next/prev -> snippet forward/backward
+			-- Enter to accept/cancel (if use Windows Terminal
+			--     (cancel returns to the initial input, while 'hide' remains the current text)
+			-- Ctrl-B/F to scroll documentation up/down
+			-- Ctrl-E also stops snippet
 			['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
-			['<C-e>'] = { 'hide' },
-			['<C-y>'] = { 'select_and_accept' },
+			['<C-e>'] = { 'hide', vim.snippet.stop, 'fallback' },
+			['<C-y>'] = { 'select_and_accept', 'fallback' },
 			['<CR>'] = { 'accept', 'fallback' },
+			['<S-CR>'] = { 'cancel', 'hide_signature', 'fallback' },
 
 			['<Up>'] = { 'select_prev', 'fallback' },
 			['<Down>'] = { 'select_next', 'fallback' },
-			--['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
-			--['<C-n>'] = { 'select_next', 'fallback_to_mappings' },
-			['<Tab>'] = { 'select_next', 'fallback_to_mappings' },
-			['<S-Tab>'] = { 'select_prev', 'fallback_to_mappings' },
+			-- change fallback_to_mappings to fallback, so that vim builtin <C-P>/<C-N> is used
+			['<C-p>'] = { 'select_prev', 'fallback' },
+			['<C-n>'] = { 'select_next', 'fallback' },
+			['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback_to_mappings' },
+			['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback_to_mappings' },
 
 			['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
 			['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
@@ -51,7 +62,7 @@ return {
 		appearance = {
 			-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
 			-- Adjusts spacing to ensure icons are aligned
-			nerd_font_variant = 'mono'
+			nerd_font_variant = 'normal'
 		},
 
 		-- (Default) Only show the documentation popup when manually triggered
@@ -59,6 +70,9 @@ return {
 			documentation = {
 				auto_show = true,
 				auto_show_delay_ms = 0,
+				window = {
+					border = 'rounded'
+				}
 			},
 
 			menu = {
@@ -71,8 +85,10 @@ return {
 						{ "label", "label_description", gap = 1 },
 						{ "kind_icon", "kind" }
 					},
+					treesitter = { 'lsp' }
 				},
 
+				border = 'rounded'
 			},
 
 			-- Display a preview of the selected item on the current line
@@ -98,6 +114,7 @@ return {
 			enabled = true,
 			window = {
 				show_documentation = true,
+				border = 'rounded'
 			}
 		},
 	},

@@ -9,9 +9,10 @@ vim.g.maplocalleader = "\\"
 
 -- 建议: <leader>t 留作临时映射用, 例如临时设置 <leader>ta 等
 
-map('n', '<space>', '<nop>')
+map('n', '<leader>', '<nop>')
 
 -- 类似 set xxx 功能的设置
+map('n', '<leader><leader>', '<nop>')
 map('n', '<leader><leader>h', ':noh<cr>', {silent = true})
 map('n', '<leader><leader>t', ':let &showtabline = 3-&showtabline<cr>')
 map('n', '<leader><leader>w', ':set wrap!<cr>')
@@ -22,6 +23,8 @@ map('v', '<leader>a', 'c<space><c-r>"<space><esc>')
 
 -- <leader>e? edit file (实际行为一般是 split)
 -- split 方向: e 是 horizontal, E 是 vertical
+map('n', '<leader>e', '<nop>')
+map('n', '<leader>E', '<nop>')
 map('n', '<leader>ev', ':sp $MYVIMRC<cr>')
 map('n', '<leader>Ev', ':vs $MYVIMRC<cr>')
 map('n', '<leader>eb', ':buffers<cr>:sb<space>')
@@ -40,6 +43,7 @@ map('n', '<leader>/', ":let @/='\\<'..input('Search word: ')..'\\>'<CR>")
 -- 注: 使用 %:p, 当前文件为目录时, 会以 '/' 结尾, %:p:h 只会去掉该结尾
 --     pwd 是用来显示一下当前目录
 -- 当前文件所在目录
+map('n', '<leader>d', '<nop>')
 map('n', '<leader>dd', ':lc %:p:h | pwd<cr>')
 -- 工作区目录, 需要 $ws 变量
 -- TODO workspace (myplug), 还有 ew, Ew, sw
