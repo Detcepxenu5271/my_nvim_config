@@ -15,5 +15,7 @@ return {
 				functions = { fg = '#c4453f' }, -- 更鲜艳的红色
 			}
 		})
+		vim.opt.background = 'light'
+		vim.cmd('colorscheme quietlight')
 	end
 }

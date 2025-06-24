@@ -1,3 +1,5 @@
+-- dependencies: Nerd Font
+
 -- 引入自定义颜色模块
 local C = require('util.color')
 -- 自定义高亮的简写

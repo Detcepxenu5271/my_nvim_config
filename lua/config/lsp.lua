@@ -1,8 +1,8 @@
-vim.lsp.enable('lua-ls')
-vim.lsp.enable('clangd')
-vim.lsp.enable('vimls')
-vim.lsp.enable('jsonls')
-vim.lsp.enable('pico8_ls')
+--vim.lsp.enable('lua-ls')
+--vim.lsp.enable('clangd')
+--vim.lsp.enable('vimls')
+--vim.lsp.enable('jsonls')
+--vim.lsp.enable('pico8_ls')
 
 local lsp_attach = vim.api.nvim_create_augroup('lsp-attach', {clear = true})
 

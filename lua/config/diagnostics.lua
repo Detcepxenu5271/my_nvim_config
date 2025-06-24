@@ -1,3 +1,5 @@
+-- dependencies: Nerd Font
+
 vim.diagnostic.config({
 	signs = {
 		text = {

@@ -52,6 +52,3 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 	end
 })
 
-vim.opt.background = 'light'
-vim.cmd('colorscheme quietlight')
-
