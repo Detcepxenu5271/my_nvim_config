@@ -13,6 +13,7 @@ opt.relativenumber = true
 
 -- 高亮当前行
 opt.cursorline = true
+--opt.cursorcolumn = true
 
 -- 状态栏，0 不显示，1 只在多窗口时显示，2 一直显示
 -- [DEFAULT] opt.laststatus = 2
@@ -24,6 +25,8 @@ opt.cursorline = true
 opt.list = true
 --opt.listchars = {eol = '$', tab = '>-', trail = 'X'}
 opt.listchars = {tab = '>-', trail = 'X'}
+
+opt.lazyredraw = true;
 
 -- ======== 格 式 (format) ========
 
@@ -71,6 +74,7 @@ opt.smartcase = true
 opt.complete:remove('u')
 opt.complete:append('k')
 opt.complete:append('s')
+opt.completeopt:append('longest')
 
 -- ======== 文 件 (file) ========
 
@@ -101,12 +105,16 @@ opt.wildoptions:append('fuzzy')
 
 -- ======== 其 他 (else) ========
 
+-- 按键序列会一直等待
+opt.timeout = false
+
 -- 输入括号时，会暂时跳转到匹配的括号
 --opt.showmatch = true
 --opt.matchtime = 5
 
 -- 剪贴板
-opt.clipboard:append('unnamedplus')
+-- 测试: 习惯上改为如果要使用系统剪贴板, 手动使用 "+ 寄存器
+--opt.clipboard:append('unnamedplus')
 
 -- K 改为使用 vim 的 help 查询, 而不是 :Man
 opt.keywordprg = ':help'
@@ -119,9 +127,9 @@ opt.keywordprg = ':help'
 vim.g.netrw_banner = 0
 -- 初始窗口大小为25%
 --vim.g.netrw_winsize=25
--- 使用树形结构
--- 可以用 - 到上一级目录, gn 将根目录设为光标处的目录
-vim.g.netrw_liststyle = 3
+-- 树形结构: 3
+--     可以用 - 到上一级目录, gn 将根目录设为光标处的目录
+vim.g.netrw_liststyle = 0
 -- 分割窗口时默认在右边
 vim.g.netrw_altv = 1
 -- enter时在上一个窗口打开

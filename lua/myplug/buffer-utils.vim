@@ -18,7 +18,10 @@ function! BufMakeScratch(bname)
 	" 注: 如果是设置, 默认会修改 local, 不修改 global
 	call setbufvar(bn, '&buftype', 'nofile')
 	call setbufvar(bn, '&bufhidden', 'hide')
+	call setbufvar(bn, '&buflisted', 0)
 	call setbufvar(bn, '&swapfile', 0)
+	" BUG 对同一个 buffer 重复调用该函数, 会创建多个相同的 autocmd
+	exe 'autocmd BufWinEnter <buffer='..bn..'> setl winhighlight=Normal:ScratchNormal,EndOfBuffer:ScratchEndOfBuffer'
 	" 不管用, 因为选项是 local to window 而不是 local to buffer
 	"call setbufvar(bn, '&wincolor', 'ScratchNormal')
 endfunction

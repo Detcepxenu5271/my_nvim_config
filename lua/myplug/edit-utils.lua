@@ -1,0 +1,4 @@
+-- to title case
+-- 本来打算设置命令, 但是觉得快捷键更好
+-- TODO 此类快捷键是放在 myplug, 还剩 keymap.lua?
+--vim.keymap.set('v', 't', ":s/\\%V\\w\\+/\\u&/g<cr>", {})

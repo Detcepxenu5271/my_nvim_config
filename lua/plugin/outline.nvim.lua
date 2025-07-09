@@ -5,6 +5,9 @@ return {
 	keys = { -- Example mapping to toggle outline
 		{ "gro", "<cmd>Outline<CR>", desc = "Toggle outline" },
 	},
+	dependencies = {
+		'epheien/outline-treesitter-provider.nvim'
+	},
 	opts = {},
 	config = function ()
 		require("outline").setup({
@@ -44,6 +47,18 @@ return {
 				-- j/k/<down>/<up>.
 				down_and_jump = '<C-n>',
 				up_and_jump = '<C-p>',
+			},
+			providers = {
+				priority = { 'lsp', 'coc', 'markdown', 'norg', 'man', 'treesitter' },
+				-- Configuration for each provider (3rd party providers are supported)
+				lsp = {
+					-- Lsp client names to ignore
+					blacklist_clients = {},
+				},
+				markdown = {
+					-- List of supported ft's to use the markdown provider
+					filetypes = {'markdown'},
+				},
 			},
 		})
 	end

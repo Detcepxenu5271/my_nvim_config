@@ -15,6 +15,10 @@ return {
 	---@module 'oil'
 	---@type oil.SetupOpts
 	opts = {
+		-- if use other file explorer, false this and set lazy = true
+		default_file_explorer = true,
+		-- default false
+		watch_for_changes = true,
 		buf_options = {
 			buflisted = false,
 			bufhidden = "hide"
@@ -23,9 +27,18 @@ return {
 			winbar = "%!v:lua.get_oil_winbar()"
 		},
 		keymaps = {
-			["<C-s>"] = { "actions.select", opts = { horizontal = true } },
-			["<C-v>"] = { "actions.select", opts = { vertical = true } },
+			["<LocalLeader>s"] = { "actions.select", opts = { horizontal = true } },
+			["<LocalLeader>v"] = { "actions.select", opts = { vertical = true } },
 			["<C-h>"] = false,
+			["<C-l>"] = false,
+		},
+		preview_win = {
+			update_on_cursor_moved = false,
+			preview_method = "load",
+			win_options = {
+				-- unlist buffer but not wipe, so reopen will use the same bufnr
+				bufhidden = "delete"
+			}
 		}
 	},
 	-- Optional dependencies
@@ -35,4 +48,5 @@ return {
 	-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
 	-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
 	lazy = false,
+	--cmd = 'Oil'
 }

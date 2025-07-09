@@ -8,14 +8,16 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- 建议: <leader>t 留作临时映射用, 例如临时设置 <leader>ta 等
+--       <leader><leader> 留作插件/文件类型中特定的 leader (如果不用 localleader 的话)
 
 map('n', '<leader>', '<nop>')
 
--- 类似 set xxx 功能的设置
-map('n', '<leader><leader>', '<nop>')
-map('n', '<leader><leader>h', ':noh<cr>', {silent = true})
-map('n', '<leader><leader>t', ':let &showtabline = 3-&showtabline<cr>')
-map('n', '<leader><leader>w', ':set wrap!<cr>')
+-- option 设置
+map('n', '<leader>o', '<nop>')
+map('n', '<leader>oh', ':noh<cr>', {silent = true})
+map('n', '<leader>ot', ':let &showtabline = 3-&showtabline | set showtabline?<cr>')
+map('n', '<leader>ow', ':set wrap! wrap?<cr>')
+map('n', '<leader>on', ':set nu! rnu! nu?<cr>')
 
 -- 在当前字符前后插入空格
 map('n', '<leader>a', 'i<space><esc>la<space><esc>l')
@@ -39,15 +41,17 @@ map('n', '<leader>w', '<c-w>')
 -- 按整个单词 (whole word) 搜索
 map('n', '<leader>/', ":let @/='\\<'..input('Search word: ')..'\\>'<CR>")
 
--- directory (lc 当前目录)
+-- directory (切换目录)
 -- 注: 使用 %:p, 当前文件为目录时, 会以 '/' 结尾, %:p:h 只会去掉该结尾
 --     pwd 是用来显示一下当前目录
--- 当前文件所在目录
 map('n', '<leader>d', '<nop>')
-map('n', '<leader>dd', ':lc %:p:h | pwd<cr>')
--- 工作区目录, 需要 $ws 变量
+-- lc 到当前文件所在目录
+map('n', '<leader>dd', [[:exe "lc" substitute(expand('%:p:h'), '^\w\+://', '', '') | pwd<cr>]])
+-- tc 到当前文件所在目录
+map('n', '<leader>dt', [[:exe "tc" substitute(expand('%:p:h'), '^\w\+://', '', '') | pwd<cr>]])
+-- tc 到工作区目录, 需要 $ws 变量
 -- TODO workspace (myplug), 还有 ew, Ew, sw
-map('n', '<leader>dw', ':lc $ws | pwd<cr>')
+map('n', '<leader>dw', ':tc $ws | pwd<cr>')
 
 -- ======== Insert 模式下的 "leader" ========
 
@@ -87,6 +91,12 @@ map('c', '<c-f>', '<right>')
 
 map('i', '<c-l>', '<del>')
 map('c', '<c-l>', '<del>')
+
+-- ======== 查看 (view) ========
+
+-- BUG <Tab> 和 <C-i> 默认是绑定的, 即修改 <Tab> 的映射, <C-i> 也会被修改
+--     参考 tui-modifyOtherKeys, 可能需要单独映射一下 <C-i>
+--map('n', '<Tab>', 'za')
 
 -- ======== 窗口 (window) ========
 

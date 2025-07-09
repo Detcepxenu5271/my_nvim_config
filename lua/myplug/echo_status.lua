@@ -65,14 +65,29 @@ local mode_info = {
 	},
 }
 
-local function mode_echo()
+-- BUG 不能全局添加：因为
+-- if package.loaded['orgmode'] then
+-- 	for i, _ in ipairs(mode_info) do
+-- 		print('[D] '..tostr(i))
+-- 		table.insert(mode_info[i], { orgmode.statusline(), "Normal" })
+-- 	end
+-- end
+
+local function echo_status()
+	local content = {}
 	local m = vim.api.nvim_get_mode().mode
 	if mode_info[m] then
-		vim.api.nvim_echo(mode_info[m], false, {})
+		for _, v in pairs(mode_info[m]) do
+			table.insert(content, v)
+		end
 	end
+	if vim.bo.filetype == 'org' and package.loaded['orgmode'] then
+		table.insert(content, { orgmode.statusline(), "Normal" })
+	end
+	vim.api.nvim_echo(content, false, {})
 end
 
 -- 模式切换处理
 vim.api.nvim_create_autocmd("ModeChanged", {
-	callback = mode_echo
+	callback = echo_status
 })

@@ -13,6 +13,7 @@ return {
 				constants = { fg = '#d18a2e' }, -- 更鲜艳的橙色
 				numbers = { fg = '#d18a2e' },
 				functions = { fg = '#c4453f' }, -- 更鲜艳的红色
+				conditionals = { bold = true, italic = true, fg = '#006633' }, -- 深绿色+粗斜体 (原 gray_180, 和文本的黑色几乎一样)
 			}
 		})
 	end

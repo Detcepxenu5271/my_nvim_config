@@ -1,6 +1,8 @@
 return {
 	'saghen/blink.cmp',
 
+	enabled = true,
+
 	event = 'VeryLazy',
 
 	-- optional: provides snippets for the snippet source
@@ -74,11 +76,10 @@ return {
 					border = 'rounded'
 				}
 			},
-
 			menu = {
 				-- Don't automatically show the completion menu
 				auto_show = true,
-
+				max_height = 20,
 				-- nvim-cmp style menu
 				draw = {
 					columns = {
@@ -87,10 +88,17 @@ return {
 					},
 					treesitter = { 'lsp' }
 				},
-
 				border = 'rounded'
 			},
-
+			list = {
+				selection = {
+					preselect = function(ctx)
+						return vim.bo.filetype == 'cpp'
+						    or vim.bo.filetype == 'lua'
+					end,
+					auto_insert = true
+				}
+			},
 			-- Display a preview of the selected item on the current line
 			ghost_text = { enabled = false },
 		},
@@ -98,7 +106,27 @@ return {
 		-- Default list of enabled providers defined so that you can extend it
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
 		sources = {
-			default = { 'lsp', 'path', 'snippets', 'buffer' },
+			default = { 'lsp', 'buffer', 'snippets', 'path' },
+			-- orgmode: https://github.com/nvim-orgmode/orgmode
+			per_filetype = {
+				org = {'orgmode', 'buffer', 'snippets', 'path'}
+			},
+			providers = {
+				path = {
+					-- from cwd instead of current buffer's directory
+					opts = {
+						get_cwd = function(_)
+							return vim.fn.getcwd()
+						end,
+					},
+				},
+				orgmode = {
+					name = 'Orgmode',
+					module = 'orgmode.org.autocompletion.blink',
+					-- fallbacks 似乎没有作用, 暂时不知道为什么
+					--fallbacks = { 'buffer', 'snippets', 'path' },
+				},
+			},
 		},
 
 		-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
@@ -108,7 +136,11 @@ return {
 		-- See the fuzzy documentation for more information
 		fuzzy = { implementation = "prefer_rust_with_warning" },
 
-		cmdline = { enabled = false },
+		cmdline = {
+			-- BUG external (shell) command causes stuck (when type :! then other key, nvim stuck until CTRL-C)
+			-- https://github.com/Saghen/blink.cmp/issues/1926
+			enabled = false,
+		},
 
 		signature = {
 			enabled = true,

@@ -2,15 +2,16 @@
 "hi StatuslineFaint guifg=lightgrey guibg=#705697
 "hi StatuslineFaintNC guifg=lightgrey guibg=#c4b7d7
 
+"BUG 如果将窗口分成左右两边，左边的状态栏内容较长，需要在%<处截断，此时在左边窗口内移动光标，状态栏的右半部分（%=之后的部分）经常会在右边窗口的状态栏开头重复出现一次，覆盖了右边窗口状态栏的部分内容
 function MyStatusLine()
 	let s:statusline = ''
 
 	if win_getid() == g:statusline_winid
 		" -------- 左对齐部分 --------
-		" 文件全路径
-		let s:statusline ..= '%f'
 		" buffer number 和 window number
 		let s:statusline ..= '[%n]'
+		" 文件全路径, 从这里截断 (保证 bufnr 显示)
+		let s:statusline ..= '%<%f'
 		"let s:statusline..=.%{winnr()}
 		" 帮助文档
 		"let s:statusline ..= '%h'
@@ -20,7 +21,7 @@ function MyStatusLine()
 		" -------- 右对齐部分 --------
 		let s:statusline ..= '%= '
 		" 当前字符的十六进制
-		let s:statusline ..= '|%BH'
+		let s:statusline ..= '|%B'
 		" 列位置
 		" %v 是显示上的列位置 (例如一般英文字符 1 格, 中文字符 2 格)
 		" %c 是按字节的列位置
@@ -33,8 +34,8 @@ function MyStatusLine()
 		" 当前百分比
 		let s:statusline ..= '|%2p%%'
 	else
-		let s:statusline ..= '%f'
 		let s:statusline ..= '[%n]'
+		let s:statusline ..= '%<%f'
 		"let s:statusline ..= '%h'
 		let s:statusline ..= '%r%m'
 	endif
