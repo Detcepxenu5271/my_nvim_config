@@ -11,6 +11,10 @@ function! BufMakeScratch(bn)
 	call setbufvar(a:bn, '&bufhidden', 'hide')
 	call setbufvar(a:bn, '&buflisted', 0)
 	call setbufvar(a:bn, '&swapfile', 0)
+	call setbufvar(a:bn, '&autoindent', 0)
+	call setbufvar(a:bn, '&smartindent', 0)
+	call setbufvar(a:bn, '&number', 0)
+	call setbufvar(a:bn, '&relativenumber', 0)
 	" BUG 对同一个 buffer 重复调用当前函数, 会创建多个相同的 autocmd
 	exe 'autocmd BufWinEnter <buffer='..a:bn..'> setl winhighlight=Normal:ScratchNormal,EndOfBuffer:ScratchEndOfBuffer'
 	" 不管用, 因为选项是 local to window 而不是 local to buffer
@@ -24,6 +28,7 @@ function! BufSetTempView()
 endfunction
 
 " -------- scratch buffer --------
+" BUG save session 时可能有问题?
 
 " 添加 _scratch_ 缓冲区 (当前 vim 共用)
 if !bufexists('_scratch_')

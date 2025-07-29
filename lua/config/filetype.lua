@@ -1,2 +1,2 @@
-vim.filetype.add { extension = { p8 = "pico8" } }
+--vim.filetype.add { extension = { p8 = "pico8" } }
 

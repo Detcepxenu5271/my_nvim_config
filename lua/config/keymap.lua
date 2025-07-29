@@ -33,6 +33,17 @@ map('n', '<leader>Ev', ':vs $MYVIMRC<cr>')
 map('n', '<Leader>I', ':Inspect<CR>')
 map('n', '<leader>o', '<nop>')
 map('n', '<leader>oc', ':setl cursorcolumn! cursorcolumn?<cr>')
+map('n', '<leader>oc', function ()
+	local state = (vim.o.cursorline and 1 or 0) + (vim.o.cursorcolumn and 1 or 0)
+	state = (state + 1) % 3
+	if state == 0 then
+		vim.o.cursorline = false; vim.o.cursorcolumn = false
+	elseif state == 1 then
+		vim.o.cursorline = true; vim.o.cursorcolumn = false
+	else
+		vim.o.cursorline = true; vim.o.cursorcolumn = true
+	end
+end)
 map('n', '<leader>oh', ':noh<cr>', {silent = true})
 map('n', '<leader>on', ':setl nu! rnu! nu?<cr>')
 map('n', '<leader>ot', ':let &showtabline = 3-&showtabline | setl showtabline?<cr>')
@@ -56,10 +67,14 @@ map('i', '<c-b>', '<left>')
 map('i', '<c-e>', '<end>')
 map('i', '<c-f>', '<right>')
 map('n', '<C-n>', '<C-i>')
-map({'n', 'v', 'o'}, 'gH', 'g0')
-map({'n', 'v', 'o'}, 'gL', 'g$')
-map({'n', 'v', 'o'}, 'H', '0')
-map({'n', 'v', 'o'}, 'L', '$')
+map({'n', 'v', 'o'}, 'j', 'gj')
+map({'n', 'v', 'o'}, 'k', 'gk')
+map({'n', 'v', 'o'}, 'gj', 'j')
+map({'n', 'v', 'o'}, 'gk', 'k')
+map({'n', 'v', 'o'}, 'gH', '0')
+map({'n', 'v', 'o'}, 'gL', '$')
+map({'n', 'v', 'o'}, 'H', 'g0')
+map({'n', 'v', 'o'}, 'L', 'g$')
 
 -- ======== 编 辑 (edit) ========
 

@@ -12,7 +12,9 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 	pattern = 'quietlight',
 	callback = function()
 		-- 基本
+		hi(0, 'NormalNC', {bg = '#e8e8e8'})
 		hi(0, 'EndOfBuffer', {fg = C:getcolor('ql_lightgrey'), bg = 'NONE'})
+		hi(0, 'NonText', {fg = '#e4e4fc'})
 		-- 浮动窗口
 		hi(0, 'NormalFloat', {fg = C:getcolor('ql_black'), bg = C:getcolor('ql_lightgrey')})
 		hi(0, 'Pmenu', {link = 'NormalFloat'})
@@ -46,6 +48,15 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 		hi(0, 'DiagnosticSignOk', {bold = true, fg = 'NvimDarkGreen', bg = C:getcolor('ql_lightgrey')})
 		-- 折叠
 		hi(0, 'Folded', {bg = C:getcolor('folded_green')})
+		-- diff
+		-- hi(0, 'DiffAdd', {fg = C:getcolor('ql_white'), bg = C:getcolor('ql_green')})
+		-- hi(0, 'DiffDelete', {fg = C:getcolor('ql_white'), bg = C:getcolor('ql_red')})
+		-- hi(0, 'DiffChange', {fg = C:getcolor('ql_white'), bg = C:getcolor('ql_purple')})
+		-- hi(0, 'DiffText', {fg = C:getcolor('ql_black'), bg = C:getcolor('highlight_yellow')})
+		hi(0, 'DiffAdd', {fg = C:getcolor('ql_black'), bg = '#c7efcc'})
+		hi(0, 'DiffDelete', {fg = C:getcolor('ql_black'), bg = '#ffc1c2'})
+		hi(0, 'DiffChange', {fg = C:getcolor('ql_black'), bg = '#c1ebff'})
+		hi(0, 'DiffText', {fg = C:getcolor('ql_black'), bg = '#f0c674'})
 		-- 编程语言
 		hi(0, 'Exception', {fg = C:getcolor('ql_brighter_red')})
 		hi(0, '@type.builtin', {fg = C:getcolor('ql_brighter_red')})
@@ -67,12 +78,14 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 		hi(0, '@markup.heading.5.markdown', {link = 'PreProc'})
 		hi(0, '@markup.heading.6.markdown', {link = 'Type'})
 		hi(0, '@markup.list', {link = 'Keyword'})
+		hi(0, '@markup.list.unchecked', {link = 'Function'})
+		hi(0, '@markup.list.checked', {link = 'Comment'})
 		-- quickfix
 		hi(0, 'qfLineNr', {fg = C:getcolor('warning_yellow')})
 		-- scratch buffer
 		-- TODO 现在只是暂时设置
 		hi(0, 'ScratchNormal', {bg = '#f7f3e6'})
-		hi(0, 'ScratchEndOfBuffer', {bg = '#f7f3e6'})
+		hi(0, 'ScratchEndOfBuffer', {fg = C:getcolor('ql_lightgrey'), bg = '#f7f3e6'})
 	end
 })
 

@@ -2,19 +2,28 @@ return {
 	'nvim-orgmode/orgmode',
 	event = 'VeryLazy',
 	config = function()
+		if not vim.env.org_path then
+			vim.env.org_path = '~/orgfiles'
+		end
 		-- Setup orgmode
 		require('orgmode').setup({
 			org_adapt_indentation = false,
-			org_agenda_files = '~/orgfiles/**/*',
+			org_agenda_files = vim.env.org_path..'/**/*.org',
+			org_archive_location = vim.env.org_path..'/archive/%s_archive::',
 			org_capture_templates = {
+				d = {
+					description = "Default",
+					template = "* %^{PROMPT}",
+					target = vim.env.org_path.."/refile.org"
+				},
 				r = {
 					-- https://nvim-orgmode.github.io/tutorial#captures
 					description = "Repo",
 					template = "* [[%x][%(return string.match('%x', '([^/]+)$'))]]%?",
-					target = "~/orgfiles/repos.org",
+					target = vim.env.org_path.."/repos.org",
 				}
 			},
-			org_default_notes_file = '~/orgfiles/refile.org',
+			org_default_notes_file = vim.env.org_path..'/refile.org',
 			org_hide_emphasis_markers = true,
 			-- 'native' or 'entities':
 			-- ATTENTION! If use nvim-treesitter, set highlight.additional_vim_regex_highlighting to false or add org to the list
@@ -50,5 +59,12 @@ return {
 				})
 			end,
 		})
+		-- search headline of orgfiles
+		-- TODO 改为自定义命令, 并支持指定大纲层级
+		vim.keymap.set('n', '<Leader>OF', [[:tab sp<CR>:silent grep '^\*+ ' ]]..vim.env.org_path..[[/**/*.org<CR>:tc %:p:h<CR>:copen<CR>]])
+		-- open refile.org
+		vim.keymap.set('n', '<Leader>Or', ':sp $org_path/refile.org<CR>')
+
+		vim.keymap.set('ca', 'pott', ":\\zs\\w\\+\\ze:<C-r>=Eatchar('\\s')<CR>", {desc = 'Pattern of Org Tag'})
 	end,
 }

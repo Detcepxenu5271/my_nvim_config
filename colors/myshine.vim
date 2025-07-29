@@ -9,11 +9,12 @@ runtime colors/shine.vim
 set background=light
 
 " change the color
+hi NormalNC guibg=#e8e8e8
 hi NonText guibg=NONE
 hi Search guifg=#f5f5f5
 hi MoreMsg guibg=#f5f5f5
 hi ModeMsg guibg=#f5f5f5
-hi StatusLine guifg=#f5f5f5
+hi StatusLine gui=bold guifg=black guibg=lightgrey
 hi StatusLineNC guifg=#f5f5f5
 hi WarningMsg guibg=#f5f5f5
 hi DiffAdd guifg=#f5f5f5

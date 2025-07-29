@@ -1,6 +1,5 @@
 " 定义行数指示器高亮组（灰色背景，白色文字）
-" TODO 兼容 color.lua
-highlight FoldNumber guifg=#d18a2e guibg=#c4d6b4
+"highlight FoldNumber guifg=#d18a2e guibg=#c4d6b4
 
 function! FoldText()
 	" [1] 获取并清理折叠行内容

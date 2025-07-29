@@ -64,6 +64,10 @@ local mode_info = {
 		{ " REPLACE ", "ModeReplace" },
 		{ "", "ModeReplaceRev" },
 	},
+	Rv = {
+		{ " R_VIRTUAL ", "ModeVirtualReplace" },
+		{ "", "ModeReplaceRev" },
+	},
 	no = {
 		{ " OPENDING ", "ModeOperatorPending" },
 		{ "", "ModeOperatorPendingRev" },

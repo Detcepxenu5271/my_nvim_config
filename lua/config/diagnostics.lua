@@ -9,6 +9,7 @@ vim.diagnostic.config({
 	}
 })
 
+-- use gKgK to go into the float window
 vim.keymap.set('n', 'gK', function()
 	vim.diagnostic.open_float()
 end, { desc = 'Toggle diagnostic float' })
