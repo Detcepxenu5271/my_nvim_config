@@ -53,3 +53,7 @@ vim.g.netrw_preview = 1
 vim.g.markdown_folding = 1
 vim.g.markdown_syntax_conceal = 1
 
+vim.cmd('packadd cfilter')
+
+vim.cmd('packadd termdebug')
+

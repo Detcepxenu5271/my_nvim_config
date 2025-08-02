@@ -20,7 +20,7 @@ return {
 				prefix = "<LocalLeader>n",
 				-- orgmode 占用 <Leader>Oc
 				capture = "<Leader>Onc",
-				find_node = "<Leader>Of",
+				find_node = "<Leader>Onf",
 			},
 			extensions = {
 				dailies = {

@@ -4,9 +4,9 @@ return {
 	event = "VeryLazy",
 
 	-- optional for icon support
-	dependencies = { "nvim-tree/nvim-web-devicons" },
+	--dependencies = { "nvim-tree/nvim-web-devicons" },
 	-- or if using mini.icons/mini.nvim
-	--dependencies = { "echasnovski/mini.icons" },
+	dependencies = { "echasnovski/mini.icons" },
 
 	-- ?这里的配置无效, 需要用 require("fzf-lua").setup { ... }
 	--opts = { },

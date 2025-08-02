@@ -1,5 +1,11 @@
 vim.wo.conceallevel = 2
 
+-- open org file from agenda view will disable cursorline and number, relativenumber
+vim.wo.cursorline = true
+vim.wo.cursorcolumn = false
+vim.wo.number = true
+vim.wo.relativenumber = true
+
 vim.bo.expandtab = true
 vim.bo.tabstop = 4
 

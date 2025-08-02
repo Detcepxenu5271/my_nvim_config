@@ -26,12 +26,15 @@ return {
 			org_default_notes_file = vim.env.org_path..'/refile.org',
 			org_hide_emphasis_markers = true,
 			-- 'native' or 'entities':
+			-- native: see org as latex
+			-- entities: only see as latex in $$, \(\), ...
 			-- ATTENTION! If use nvim-treesitter, set highlight.additional_vim_regex_highlighting to false or add org to the list
 			--            Because now inline latex requires vim regex syntax
 			org_highlight_latex_and_related = "entities",
 			org_id_link_to_org_use_id = true,
+			--org_indent_mode_turns_off_org_adapt_indentation = true,
 			--org_indent_mode_turns_on_hiding_stars = true,
-			org_startup_indented = false,
+			org_startup_indented = true,
 			org_tags_column = 0,
 			org_todo_keywords = {'TODO(t)', 'NEXT(n)', '|', 'DONE(d)', 'CANCEL(c)'},
 			org_use_tag_inheritance = true,
@@ -61,7 +64,10 @@ return {
 		})
 		-- search headline of orgfiles
 		-- TODO 改为自定义命令, 并支持指定大纲层级
-		vim.keymap.set('n', '<Leader>OF', [[:tab sp<CR>:silent grep '^\*+ ' ]]..vim.env.org_path..[[/**/*.org<CR>:tc %:p:h<CR>:copen<CR>]])
+		--vim.api.nvim_create_user_command('OrgFindHeadline', function ()
+		--end, {desc = 'Find Org Headlines'})
+		-- quickfix (grep and copen) 全局, location list (lgrep and lopen) 必须和某个/某些窗口绑定
+		vim.keymap.set('n', '<Leader>Of', [[:tab sp<CR>:silent grep '^\*+ ' ]]..vim.env.org_path..[[/**/*.org<CR>:tc %:p:h<CR>:copen<CR>]])
 		-- open refile.org
 		vim.keymap.set('n', '<Leader>Or', ':sp $org_path/refile.org<CR>')
 

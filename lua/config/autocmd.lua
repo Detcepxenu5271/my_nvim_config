@@ -11,3 +11,25 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 	--      AI recommend use pcall
 })
 
+vim.api.nvim_create_autocmd('InsertEnter', {
+	group = 'my_autocmd',
+	pattern = '*',
+	callback = function()
+		if vim.o.number then
+			vim.o.relativenumber = false
+		end
+	end,
+	desc = 'use norelativenumber in insert mode'
+})
+
+vim.api.nvim_create_autocmd('InsertLeave', {
+	group = 'my_autocmd',
+	pattern = '*',
+	callback = function()
+		if vim.o.number then
+			vim.o.relativenumber = true
+		end
+	end,
+	desc = 'use relativenumber in normal mode'
+})
+
