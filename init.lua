@@ -71,6 +71,9 @@ vim.g.netrw_preview = 1
 vim.g.markdown_folding = 1
 vim.g.markdown_syntax_conceal = 1
 
+vim.cmd('packadd cfilter')
+vim.cmd('packadd! termdebug')
+
 -- +===========+
 -- |  keymaps  |
 -- +===========+
@@ -109,9 +112,27 @@ map('n', '<leader>ev', ':sp $MYVIMRC<cr>')
 map('n', '<leader>Ev', ':vs $MYVIMRC<cr>')
 map('n', '<Leader>I', ':Inspect<CR>')
 map('n', '<leader>o', '<nop>')
-map('n', '<leader>oc', ':setl cursorcolumn! cursorcolumn?<cr>')
+map('n', '<leader>oc', function ()
+	local state = (vim.o.cursorline and 1 or 0) + (vim.o.cursorcolumn and 1 or 0)
+	state = (state + 1) % 3
+	if state == 0 then
+		vim.o.cursorline = false; vim.o.cursorcolumn = false
+	elseif state == 1 then
+		vim.o.cursorline = true; vim.o.cursorcolumn = false
+	else
+		vim.o.cursorline = true; vim.o.cursorcolumn = true
+	end
+end)
 map('n', '<leader>oh', ':noh<cr>', {silent = true})
-map('n', '<leader>on', ':setl nu! rnu! nu?<cr>')
+map('n', '<leader>on', function()
+	if vim.o.number then
+		vim.o.number = false
+		vim.o.relativenumber = false
+	else
+		vim.o.number = true
+		vim.o.relativenumber = true
+	end
+end)
 map('n', '<leader>ot', ':let &showtabline = 3-&showtabline | setl showtabline?<cr>')
 map('n', '<leader>ow', ':setl wrap! wrap?<cr>')
 map('n', '<leader>sv', ':source $MYVIMRC<cr>')
@@ -133,10 +154,14 @@ map('i', '<c-b>', '<left>')
 map('i', '<c-e>', '<end>')
 map('i', '<c-f>', '<right>')
 map('n', '<C-n>', '<C-i>')
-map({'n', 'v', 'o'}, 'gH', 'g0')
-map({'n', 'v', 'o'}, 'gL', 'g$')
-map({'n', 'v', 'o'}, 'H', '0')
-map({'n', 'v', 'o'}, 'L', '$')
+map({'n', 'v', 'o'}, 'j', 'gj')
+map({'n', 'v', 'o'}, 'k', 'gk')
+map({'n', 'v', 'o'}, 'gj', 'j')
+map({'n', 'v', 'o'}, 'gk', 'k')
+map({'n', 'v', 'o'}, 'gH', '0')
+map({'n', 'v', 'o'}, 'gL', '$')
+map({'n', 'v', 'o'}, 'H', 'g0')
+map({'n', 'v', 'o'}, 'L', 'g$')
 
 -- ======== 编 辑 (edit) ========
 
@@ -181,7 +206,17 @@ vim.keymap.set('ca', 'wsh', 'leftabove vertical')
 vim.keymap.set('ca', 'wsj', 'belowright')
 vim.keymap.set('ca', 'wsk', 'aboveleft')
 vim.keymap.set('ca', 'wsl', 'rightbelow vertical')
-vim.cmd([[cnorea ptt <[^>]\+><C-r>=Eatchar('\s')<CR>]])
+vim.keymap.set('ca', 'ee', "expand('')<Left><Left><C-r>=Eatchar('\\s')<CR>")
+vim.keymap.set('ca', 'dd', '%:p:h')
+vim.keymap.set('ca', 'ptt', "<[^>]\\+><C-r>=Eatchar('\\s')<CR>")
+vim.keymap.set('ca', 'll', "<lt>Leader><C-r>=Eatchar('\\s')<CR>")
+vim.keymap.set('ca', 'lll', "<lt>LocalLeader><C-r>=Eatchar('\\s')<CR>")
+
+-- +===========+
+-- |  command  |
+-- +===========+
+
+vim.api.nvim_create_user_command('ReverseLine', [[exe "keepp '<,'>g/^/m "..(line("'<")-1)]], {desc = 'reverse previous selected lines'})
 
 -- +===========+
 -- |  autocmd  |
@@ -198,6 +233,28 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 	desc = 'highlight on yank'
 	-- TODO "silent!" not implemented
 	--      AI recommend use pcall
+})
+
+vim.api.nvim_create_autocmd('InsertEnter', {
+	group = 'my_autocmd',
+	pattern = '*',
+	callback = function()
+		if vim.o.number then
+			vim.o.relativenumber = false
+		end
+	end,
+	desc = 'use norelativenumber in insert mode'
+})
+
+vim.api.nvim_create_autocmd('InsertLeave', {
+	group = 'my_autocmd',
+	pattern = '*',
+	callback = function()
+		if vim.o.number then
+			vim.o.relativenumber = true
+		end
+	end,
+	desc = 'use relativenumber in normal mode'
 })
 
 -- +===============+
@@ -251,11 +308,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.cmd('colorscheme shine')
 opt.background='light'
 vim.cmd([[
+hi NormalNC guibg=#e8e8e8
 hi NonText guibg=NONE
 hi Search guifg=#f5f5f5
 hi MoreMsg guibg=#f5f5f5
 hi ModeMsg guibg=#f5f5f5
-hi StatusLine guifg=#f5f5f5
+hi StatusLine gui=bold guifg=black guibg=lightgrey
 hi StatusLineNC guifg=#f5f5f5
 hi WarningMsg guibg=#f5f5f5
 hi DiffAdd guifg=#f5f5f5
@@ -287,4 +345,109 @@ vim.api.nvim_create_autocmd('FileType', {
 	end,
 	desc = 'markdown "ftplugin" (by autocmd manually)'
 })
+
+-- +===========+
+-- |  myplugs  |
+-- +===========+
+
+vim.cmd([[
+" foldtext
+function! FoldText()
+	let line = getline(v:foldstart)
+	let line = substitute(line, '^\t\+', '\=repeat(" ", len(submatch(0)) * &l:tabstop)', '')
+	let line = substitute(line, '\s*$', '', 'g')
+
+	let win_width = winwidth(0)
+	if &number || &relativenumber
+		let win_width -= max([&numberwidth, strlen(line('$')) + 1])
+	endif
+
+	let numOfLines = v:foldend - v:foldstart + 1
+	let numIndicator = numOfLines . ' LINES'
+
+	let indicator_width = strdisplaywidth(numIndicator)
+	let max_line_width = win_width - indicator_width - 2
+	if strdisplaywidth(line) > max_line_width
+		if strdisplaywidth(line) <= 3
+			let line = repeat('.', strdisplaywidth(line))
+		else
+			let line = strpart(line, 0, max_line_width-3)..'...'
+		endif
+	endif
+
+	let padding = max([win_width - strdisplaywidth(line) - indicator_width, 1])
+
+	return line . repeat(' ', padding) . numIndicator
+endfunction
+
+set foldtext=FoldText()
+
+" statusline
+function MyStatusLine()
+	let s:statusline = ''
+
+	if win_getid() == g:statusline_winid
+		let s:statusline ..= '[%n]'
+		let s:statusline ..= '%<%f'
+		let s:statusline ..= '%r%m'
+
+		let s:statusline ..= '%= '
+		let s:statusline ..= '|%B'
+		let s:statusline ..= '|%v'
+		let s:statusline ..= '|%Y'
+		let s:statusline ..= '|%2p%%'
+	else
+		let s:statusline ..= '[%n]'
+		let s:statusline ..= '%<%f'
+		let s:statusline ..= '%r%m'
+	endif
+	
+	return s:statusline
+endfunction
+
+set statusline=%!MyStatusLine()
+
+" tabline
+function! TabHasModifiedBuffers(tabnr)
+	let tabinfo = gettabinfo(a:tabnr)
+	if empty(tabinfo) | return 0 | endif
+
+	return len(filter(tabinfo[0].windows, 'getbufvar(winbufnr(v:val), "&modified")')) > 0
+endfunction
+
+function! MyTabLine()
+	let s = ''
+	for i in range(tabpagenr('$'))
+		if i+1 == tabpagenr()
+			let tab_hi = '%#TabLineSel#'
+			let tabnr_hi = '%#TabLineSel#'
+		else
+			let tab_hi = '%#TabLine#'
+			let tabnr_hi = '%#TabLine#'
+		endif
+
+		let s ..= '%' .. (i+1) .. 'T'
+
+		let buflist = tabpagebuflist(i+1)
+		let winnr = tabpagewinnr(i+1)
+
+		let s ..= tab_hi .. ' '
+		let s ..= tabnr_hi .. '[' .. (i+1)
+		if TabHasModifiedBuffers(i+1) | let s ..= '+' | endif
+		let s ..= ']'
+		let s ..= tab_hi .. ' ' .. fnamemodify(getcwd(winnr, i+1), ':t') .. '/'
+		let s ..= (len(buflist) > 1 ? '('..len(buflist)..')' : '')
+		let s ..= ' '
+	endfor
+
+	let s ..= '%#TabLineFill#%T'
+	if tabpagenr('$') > 1
+		let s ..= '%=%#TabLine#%999XX'
+	endif
+
+	return s
+endfunction
+
+set tabline=%!MyTabLine()
+]])
 
