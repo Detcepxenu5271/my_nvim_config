@@ -1,2 +1,2 @@
 -- or 'ascii'
-MiniIcons.config.style = 'glyph'
+--MiniIcons.config.style = 'glyph'

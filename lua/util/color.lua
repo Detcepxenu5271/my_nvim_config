@@ -24,7 +24,8 @@ M.colornames = {
 	highlight_yellow = '#f0c674',
 	warning_yellow = '#ca7602',
 	--warning_yellow = '#ff922b',
-	folded_green = '#c4d6b4'
+	folded_green = '#c4d6b4',
+	scratch_backgound_yellow = '#f7f3e6'
 }
 
 function M.getcolor(self, name)

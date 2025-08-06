@@ -12,7 +12,9 @@ opt.ignorecase = true
 opt.jumpoptions:append('stack')
 opt.lazyredraw = true;
 opt.list = true
-opt.listchars = {tab = '>-', trail = 'X'}
+-- simulate indent line
+opt.listchars = {tab = '│ ', trail = 'X'}
+--opt.listchars = {tab = '>-', trail = 'X'}
 opt.nrformats:append('alpha')
 opt.number = true
 opt.relativenumber = true
@@ -20,6 +22,7 @@ opt.shiftround = true
 opt.shiftwidth = 4
 opt.smartcase = true
 opt.smartindent = true
+opt.splitkeep = 'screen'
 opt.splitbelow = true
 opt.splitright = true
 opt.tabstop = 4
@@ -55,5 +58,6 @@ vim.g.markdown_syntax_conceal = 1
 
 vim.cmd('packadd cfilter')
 
-vim.cmd('packadd termdebug')
+-- add manually?
+--vim.cmd('packadd! termdebug')
 

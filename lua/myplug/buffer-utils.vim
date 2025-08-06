@@ -11,8 +11,9 @@ function! BufMakeScratch(bn)
 	call setbufvar(a:bn, '&bufhidden', 'hide')
 	call setbufvar(a:bn, '&buflisted', 0)
 	call setbufvar(a:bn, '&swapfile', 0)
-	call setbufvar(a:bn, '&autoindent', 0)
-	call setbufvar(a:bn, '&smartindent', 0)
+	" ?考虑使用 paste 模式解决复制的问题
+	"call setbufvar(a:bn, '&autoindent', 0)
+	"call setbufvar(a:bn, '&smartindent', 0)
 	call setbufvar(a:bn, '&number', 0)
 	call setbufvar(a:bn, '&relativenumber', 0)
 	" BUG 对同一个 buffer 重复调用当前函数, 会创建多个相同的 autocmd

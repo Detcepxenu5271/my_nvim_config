@@ -69,6 +69,8 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 		hi(0, 'LspReferenceText', {bg = C:getcolor('ql_lightpurple')})
 		hi(0, 'LspReferenceWrite', {bg = C:getcolor('ql_lightpurple')})
 		hi(0, 'LspSignatureActiveParameter', {bg = C:getcolor('ql_lightpurple')})
+		-- BUG 如果不加, 切换 colorscheme 时, 这个会被设成 NvimLightGrey2
+		hi(0, '@variable', {fg = 'NvimDarkGrey2'})
 		-- @markup
 		-- heading: 参考 nvim-orgmode 插件
 		hi(0, '@markup.heading.1.markdown', {link = 'Title'})
@@ -83,13 +85,25 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 		-- quickfix
 		hi(0, 'qfLineNr', {fg = C:getcolor('warning_yellow')})
 		-- scratch buffer
-		-- TODO 现在只是暂时设置
-		hi(0, 'ScratchNormal', {bg = '#f7f3e6'})
-		hi(0, 'ScratchEndOfBuffer', {fg = C:getcolor('ql_lightgrey'), bg = '#f7f3e6'})
+		hi(0, 'ScratchNormal', {bg = C:getcolor('scratch_backgound_yellow')})
+		hi(0, 'ScratchEndOfBuffer', {fg = C:getcolor('ql_lightgrey'), bg = C:getcolor('scratch_backgound_yellow')})
 	end
 })
 
--- TODO 如果找不到, 使用 myshine
-vim.opt.background = 'light'
-vim.cmd('colorscheme quietlight')
+local colorscheme_fallback = {
+	{'quietlight', 'light'},
+	{'myshine', 'light'},
+	{'shine', 'light'},
+	{'default', 'light'},
+}
+for _, item in ipairs(colorscheme_fallback) do
+	local scheme = item[1]
+	local backgound = item[2]
+	if pcall(vim.cmd, 'colorscheme '..scheme) then
+		vim.o.background = background
+		break
+	end
+end
 
+--vim.cmd('colorscheme quietlight')
+--vim.o.background = 'light'
