@@ -38,6 +38,7 @@ opt.shiftround = true
 opt.shiftwidth = 4
 opt.smartcase = true
 opt.smartindent = true
+opt.splitkeep = 'screen'
 opt.splitbelow = true
 opt.splitright = true
 opt.tabstop = 4
@@ -72,7 +73,7 @@ vim.g.markdown_folding = 1
 vim.g.markdown_syntax_conceal = 1
 
 vim.cmd('packadd cfilter')
-vim.cmd('packadd! termdebug')
+--vim.cmd('packadd! termdebug')
 
 -- +===========+
 -- |  keymaps  |
