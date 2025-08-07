@@ -66,7 +66,6 @@ return {
 		-- TODO 改为自定义命令, 并支持指定大纲层级
 		--vim.api.nvim_create_user_command('OrgFindHeadline', function ()
 		--end, {desc = 'Find Org Headlines'})
-		-- quickfix (grep and copen) 全局, location list (lgrep and lopen) 必须和某个/某些窗口绑定
 		vim.keymap.set('n', '<Leader>Of', [[:tab sp<CR>:silent grep '^\*+ ' ]]..vim.env.org_path..[[/**/*.org<CR>:tc %:p:h<CR>:copen<CR>]])
 		-- open refile.org
 		vim.keymap.set('n', '<Leader>Or', ':sp $org_path/refile.org<CR>')

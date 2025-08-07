@@ -117,11 +117,9 @@ endfunction
 " 仅在 markdown 文件中映射 gf, <c-w>f 等
 augroup myplug_markdown_utils
     autocmd!
-    autocmd FileType markdown nnoremap <buffer><silent> gf :call GotoMarkdownHeader()<CR>
-    autocmd FileType markdown nnoremap <buffer><silent> <c-w>f :call GotoMarkdownHeader(1)<CR>
-	" 推荐在设置映射 <leader>w 为 <c-w> 时开启
-    autocmd FileType markdown nnoremap <buffer><silent> <leader>wf :call GotoMarkdownHeader(1)<CR>
-    autocmd FileType markdown nnoremap <buffer><silent> <leader>Wf :call GotoMarkdownHeader(1, 1)<CR>
+    autocmd FileType markdown nnoremap <buffer><silent> <LocalLeader>oo :call GotoMarkdownHeader()<CR>
+    autocmd FileType markdown nnoremap <buffer><silent> <LocalLeader>os :call GotoMarkdownHeader(1)<CR>
+    autocmd FileType markdown nnoremap <buffer><silent> <LocalLeader>ov :call GotoMarkdownHeader(1, 1)<CR>
 augroup END
 
 " ======== Markdown 格式化表格 ========

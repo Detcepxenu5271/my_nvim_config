@@ -15,13 +15,13 @@ local function build_with_clangpp(flags, isdebug)
 	end
 
 	local compile_cmd = string.format(
-		"clang++ -Wall %s -o '%s/%s' '%s'",
+		'clang++ -Wall %s -o "%s/%s" "%s"',
 		flags,
 		tmpbin_dir, out_name,
 		cur_file
 	)
 
-	vim.api.nvim_command("5new | terminal "..compile_cmd)
+	vim.api.nvim_command('5new | terminal '..compile_cmd)
 	-- 返回代码窗口
 	vim.cmd('wincmd p')
 	--vim.api.nvim_command("startinsert")
@@ -32,13 +32,13 @@ local function run(flags)
 	local bin_name = vim.fn.expand('%:t:r')
 
 	local run_cmd = string.format(
-		"'%s/%s' %s",
+		'"%s/%s" %s',
 		tmpbin_dir, bin_name,
 		flags
 	)
 
-	vim.api.nvim_command("10new | terminal "..run_cmd)
-	vim.api.nvim_command("startinsert")
+	vim.api.nvim_command('10new | terminal '..run_cmd)
+	vim.api.nvim_command('startinsert')
 end
 
 -- ======== autogroup ========
@@ -83,9 +83,9 @@ vim.api.nvim_create_autocmd('FileType', {
 	group = cxx_utils_group,
 	callback = function ()
 		-- TODO consider use B rather than b
-		vim.keymap.set('n', '<leader>bb', ':Bclangpp<cr>', {buffer = true})
-		vim.keymap.set('n', '<leader>bd', ':Bclangpp!<cr>', {buffer = true})
-		vim.keymap.set('n', '<leader>r', ':R<cr>', {buffer = true})
+		vim.keymap.set('n', '<LocalLeader>bb', ':Bclangpp<cr>', {buffer = true})
+		vim.keymap.set('n', '<LocalLeader>bd', ':Bclangpp!<cr>', {buffer = true})
+		vim.keymap.set('n', '<LocalLeader>r', ':R<cr>', {buffer = true})
 		-- TODO build and run: use one window to show, or build silently unless fail
 		--vim.keymap.set('n', '<leader>br', function (opts)
 		--	build_with_clangpp('', false)

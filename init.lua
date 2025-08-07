@@ -13,6 +13,7 @@ require 'util.recommended_builtin'
 
 require 'config.abbreviation'
 require 'config.autocmd'
+require 'config.compatibility'
 require 'config.diagnostics'
 require 'config.filetype'
 require 'config.keymap'
