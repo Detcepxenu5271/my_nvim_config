@@ -452,3 +452,20 @@ endfunction
 set tabline=%!MyTabLine()
 ]])
 
+-- +=================+
+-- |  compatibility  |
+-- +=================+
+
+if string.find(vim.o.shell, 'bash') or string.find(vim.o.shell, 'zsh') then
+	vim.o.shellcmdflag = '-c'
+	vim.o.shellslash = true
+	if vim.fn.has('win32') then
+		vim.o.shellquote = ''
+		vim.o.shellxquote = ''
+	end
+elseif string.find(vim.o.shell, 'cmd') then
+	vim.o.shellcmdflag = '/c'
+elseif string.find(vim.o.shell, 'powershell') then
+	vim.o.shellcmdflag = '-Command'
+end
+
