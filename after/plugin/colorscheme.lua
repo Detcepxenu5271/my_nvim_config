@@ -87,6 +87,8 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 		-- scratch buffer
 		hi(0, 'ScratchNormal', {bg = C:getcolor('scratch_backgound_yellow')})
 		hi(0, 'ScratchEndOfBuffer', {fg = C:getcolor('ql_lightgrey'), bg = C:getcolor('scratch_backgound_yellow')})
+		-- [plugin] flash.nvim
+		hi(0, 'FlashLabel', {fg = C:getcolor('pico8_7'), bg = C:getcolor('pico8_14')})
 	end
 })
 

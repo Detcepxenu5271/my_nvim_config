@@ -1,3 +1,15 @@
+-- BUG? 在 return 里定义 config = function() ... end
+--      会导致 blink.cmp 无法触发
+vim.keymap.set('n', '<Leader>oC', function()
+	if vim.b.completion == false then
+		vim.b.completion = true
+		print('[blink.cmp] enable completion')
+	else
+		vim.b.completion = false
+		print('[blink.cmp] disable completion')
+	end
+end, {desc = "Toggle blink.cmp completion"})
+
 return {
 	'saghen/blink.cmp',
 
@@ -150,6 +162,6 @@ return {
 			}
 		},
 	},
-	opts_extend = { "sources.default" }
+	opts_extend = { "sources.default" },
 }
 

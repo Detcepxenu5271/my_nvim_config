@@ -25,7 +25,24 @@ M.colornames = {
 	warning_yellow = '#ca7602',
 	--warning_yellow = '#ff922b',
 	folded_green = '#c4d6b4',
-	scratch_backgound_yellow = '#f7f3e6'
+	scratch_backgound_yellow = '#f7f3e6',
+	-- pico-8 palette
+	pico8_0 = '#000000', -- black
+	pico8_1 = '#1D2B53', -- dark blue
+	pico8_2 = '#7E2553', -- dark magenta
+	pico8_3 = '#008751', -- dark green
+	pico8_4 = '#AB5236', -- brown
+	pico8_5 = '#5F574F', -- dark grey
+	pico8_6 = '#C2C3C7', -- light grey
+	pico8_7 = '#FFF1E8', -- white
+	pico8_8 = '#FF004D', -- red
+	pico8_9 = '#FFA300', -- orange
+	pico8_10 = '#FFEC27', -- yellow
+	pico8_11 = '#00E436', -- green
+	pico8_12 = '#29ADFF', -- blue
+	pico8_13 = '#83769C', -- grey purple
+	pico8_14 = '#FF77A8', -- pink
+	pico8_15 = '#FFCCAA', -- light orange
 }
 
 function M.getcolor(self, name)

@@ -1,8 +1,9 @@
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-	--local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-	local lazyrepo = "git@github.com:folke/lazy.nvim.git"
+	-- use https as default
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	--local lazyrepo = "git@github.com:folke/lazy.nvim.git"
 	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
 	if vim.v.shell_error ~= 0 then
 		vim.api.nvim_echo({
@@ -33,8 +34,8 @@ require("lazy").setup({
 		{ import = "lazy_config/plugins" },
 	},
 	git = {
+		-- TODO use https as default
 		url_format = "git@github.com:%s.git",
-		--allow_local_modifications = true, -- AI 推荐的配置, 不知道是否存在
 	},
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.
