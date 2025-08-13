@@ -60,4 +60,9 @@ vim.cmd('packadd cfilter')
 
 -- add manually?
 --vim.cmd('packadd! termdebug')
+vim.g.termdebug_config = {
+	map_K = false,
+	map_minus = false,
+	map_plug = false,
+}
 

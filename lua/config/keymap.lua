@@ -55,7 +55,6 @@ map('n', '<leader>on', function()
 end)
 map('n', '<leader>ot', ':let &showtabline = 3-&showtabline | setl showtabline?<cr>')
 map('n', '<leader>ow', ':setl wrap! wrap?<cr>')
-map('n', '<leader>sv', ':source $MYVIMRC<cr>')
 map('n', '<leader>w', '<c-w>')
 map('v', '<leader>a', 'c<space><c-r>"<space><esc>')
 

@@ -11,7 +11,7 @@ local function build_with_clangpp(flags, isdebug)
 	local out_name = vim.fn.expand('%:t:r')
 
 	if isdebug then
-		flags = flags .. '-g -fstandalone-debug -DDEBUG'
+		flags = flags .. ' -g -fstandalone-debug -DDEBUG'
 	end
 
 	local compile_cmd = string.format(

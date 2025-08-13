@@ -87,6 +87,8 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 		-- scratch buffer
 		hi(0, 'ScratchNormal', {bg = C:getcolor('scratch_backgound_yellow')})
 		hi(0, 'ScratchEndOfBuffer', {fg = C:getcolor('ql_lightgrey'), bg = C:getcolor('scratch_backgound_yellow')})
+		-- [package] termdebug
+		hi(0, 'debugBreakpoint', {bg = C:getcolor('pico8_8')})
 		-- [plugin] flash.nvim
 		hi(0, 'FlashLabel', {fg = C:getcolor('pico8_7'), bg = C:getcolor('pico8_14')})
 	end
@@ -101,7 +103,7 @@ local colorscheme_fallback = {
 for _, item in ipairs(colorscheme_fallback) do
 	local scheme = item[1]
 	local bg = item[2]
-	if pcall(vim.cmd, 'colorscheme '..scheme) then
+	if pcall(vim.cmd.colorscheme, scheme) then
 		vim.o.background = bg
 		break
 	end
