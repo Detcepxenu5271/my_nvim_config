@@ -56,7 +56,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 		hi(0, 'DiffAdd', {fg = C:getcolor('ql_black'), bg = '#c7efcc'})
 		hi(0, 'DiffDelete', {fg = C:getcolor('ql_black'), bg = '#ffc1c2'})
 		hi(0, 'DiffChange', {fg = C:getcolor('ql_black'), bg = '#c1ebff'})
-		hi(0, 'DiffText', {fg = C:getcolor('ql_black'), bg = '#f0c674'})
+		hi(0, 'DiffText', {fg = C:getcolor('ql_black'), bg = '#ffa300'})
 		-- 编程语言
 		hi(0, 'Exception', {fg = C:getcolor('ql_brighter_red')})
 		hi(0, '@type.builtin', {fg = C:getcolor('ql_brighter_red')})

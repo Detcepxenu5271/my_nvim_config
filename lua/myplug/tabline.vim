@@ -1,3 +1,5 @@
+" help of format string: stl-%!
+
 function! TabHasModifiedBuffers(tabnr)
 	let tabinfo = gettabinfo(a:tabnr)
 	if empty(tabinfo) | return 0 | endif
@@ -43,9 +45,11 @@ function! MyTabLine()
 
 	" after the last tab fill with TabLineFill and reset tab page nr
 	let s ..= '%#TabLineFill#%T'
-	" right-align the label to close the current tab page
+	" right-align
+	let s ..= '%='
+	" the label to close the current tab page
 	if tabpagenr('$') > 1
-		let s ..= '%=%#TabLine#%999XX'
+		let s ..= '%#TabLine#%999XX'
 	endif
 
 	return s
