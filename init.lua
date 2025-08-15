@@ -30,7 +30,7 @@ opt.ignorecase = true
 opt.jumpoptions:append('stack')
 opt.lazyredraw = true;
 opt.list = true
-opt.listchars = {tab = '>-', trail = 'X'}
+opt.listchars = {tab = '│ ', trail = 'X'}
 opt.nrformats:append('alpha')
 opt.number = true
 opt.relativenumber = true
@@ -309,23 +309,26 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.cmd('colorscheme shine')
 opt.background='light'
 vim.cmd([[
-hi NormalNC guibg=#e8e8e8
-hi NonText guibg=NONE
-hi Search guifg=#f5f5f5
-hi MoreMsg guibg=#f5f5f5
-hi ModeMsg guibg=#f5f5f5
-hi StatusLine gui=bold guifg=black guibg=lightgrey
-hi StatusLineNC guifg=#f5f5f5
-hi WarningMsg guibg=#f5f5f5
+hi Cursor guifg=#f5f5f5
+hi CursorLineNr guibg=#a8a8a8
 hi DiffAdd guifg=#f5f5f5
 hi DiffChange guifg=#f5f5f5
 hi DiffDelete guifg=#f5f5f5
-hi PmenuSbar guifg=#f5f5f5 guibg=#f5f5f5
-hi TabLineSel guibg=#f5f5f5
-hi Cursor guifg=#f5f5f5
-hi Normal guibg=#f5f5f5
-hi MatchParen guifg=#f5f5f5
 hi Error guibg=#f5f5f5
+hi LineNr guibg=#e8e8e8
+hi MatchParen guifg=#f5f5f5
+hi ModeMsg guibg=#f5f5f5
+hi MoreMsg guibg=#f5f5f5
+hi NonText guibg=NONE
+hi Normal guibg=#f5f5f5
+hi NormalNC guibg=#e8e8e8
+hi PmenuSbar guifg=#f5f5f5 guibg=#f5f5f5
+hi Search guifg=#f5f5f5
+hi StatusLine gui=bold guifg=black guibg=lightgrey
+hi StatusLineNC guifg=#f5f5f5
+hi TabLineSel guibg=#f5f5f5
+hi WarningMsg guibg=#f5f5f5
+hi link WinSeperator Normal
 
 hi clear TabLineFill
 hi TabLineFill guibg=grey
@@ -415,42 +418,106 @@ function! TabHasModifiedBuffers(tabnr)
 
 	return len(filter(tabinfo[0].windows, 'getbufvar(winbufnr(v:val), "&modified")')) > 0
 endfunction
-
-function! MyTabLine()
-	let s = ''
-	for i in range(tabpagenr('$'))
-		if i+1 == tabpagenr()
-			let tab_hi = '%#TabLineSel#'
-			let tabnr_hi = '%#TabLineSel#'
-		else
-			let tab_hi = '%#TabLine#'
-			let tabnr_hi = '%#TabLine#'
-		endif
-
-		let s ..= '%' .. (i+1) .. 'T'
-
-		let buflist = tabpagebuflist(i+1)
-		let winnr = tabpagewinnr(i+1)
-
-		let s ..= tab_hi .. ' '
-		let s ..= tabnr_hi .. '[' .. (i+1)
-		if TabHasModifiedBuffers(i+1) | let s ..= '+' | endif
-		let s ..= ']'
-		let s ..= tab_hi .. ' ' .. fnamemodify(getcwd(winnr, i+1), ':t') .. '/'
-		let s ..= (len(buflist) > 1 ? '('..len(buflist)..')' : '')
-		let s ..= ' '
-	endfor
-
-	let s ..= '%#TabLineFill#%T'
-	if tabpagenr('$') > 1
-		let s ..= '%=%#TabLine#%999XX'
-	endif
-
-	return s
-endfunction
-
-set tabline=%!MyTabLine()
 ]])
+
+local bg_color = '#808080'
+local white = '#f5f5f5'
+local black = '#14161b'
+local green = '#448c27'
+local purple = '#7a3e9d'
+local orange = '#ab6526'
+local brighter_orange = '#d18a2e'
+local red = '#aa3731'
+local blue = '#4b69c6'
+
+vim.api.nvim_set_hl(0, "ModeNormal", { fg = white, bg = blue })
+vim.api.nvim_set_hl(0, "ModeInsert", { fg = white, bg = green })
+vim.api.nvim_set_hl(0, "ModeVisual", { fg = white, bg = orange })
+vim.api.nvim_set_hl(0, "ModeCmdline", { fg = white, bg = brighter_orange })
+vim.api.nvim_set_hl(0, "ModeReplace", { fg = white, bg = red })
+vim.api.nvim_set_hl(0, "ModeOperatorPending", { fg = white, bg = purple })
+vim.api.nvim_set_hl(0, "ModeTerminal", { fg = white, bg = black })
+
+local mode_info_str = {
+	n = "%#ModeNormal# NOM ",
+	i = "%#ModeInsert# INS ",
+	v = "%#ModeVisual# VIS ",
+	V = "%#ModeVisual# V-L ",
+	[''] = "%#ModeVisual# V-B ",
+	c = "%#ModeCmdline# CMD ",
+	R = "%#ModeReplace# RPL ",
+	Rv = "%#ModeVirtualReplace# R-V ",
+	no = "%#ModeOperatorPending# OPD ",
+	t = "%#ModeTerminal# TER ",
+	nt = "%#ModeNormal# TNO ",
+}
+
+local function tab_has_modified_buffers(tabnr)
+	local tabinfo = vim.fn.gettabinfo(tabnr)
+	if vim.tbl_isempty(tabinfo) then
+		return false
+	end
+	for _, winid in ipairs(tabinfo[1].windows) do
+		local bufnr = vim.fn.winbufnr(winid)
+		if vim.bo[bufnr].modified then
+			return true
+		end
+	end
+	return false
+end
+
+function _G.my_tabline()
+	local s = {}
+	local current_tab = vim.fn.tabpagenr()
+	for i = 1, vim.fn.tabpagenr('$') do
+		local tab_hi, tabnr_hi
+		if i == current_tab then
+			tab_hi = '%#TabLineSel#'
+			tabnr_hi = '%#TabLineSel#'
+		else
+			tab_hi = '%#TabLine#'
+			tabnr_hi = '%#TabLine#'
+		end
+
+		table.insert(s, '%'..i..'T')
+
+		local buflist = vim.fn.tabpagebuflist(i)
+		local winnr = vim.fn.tabpagewinnr(i)
+
+		table.insert(s, tab_hi..' ')
+		table.insert(s, tabnr_hi..'['..i)
+		if tab_has_modified_buffers(i) then
+			table.insert(s, '+')
+		end
+		table.insert(s, ']')
+
+		local cwd = vim.fn.fnamemodify(vim.fn.getcwd(-1, i), ':t')
+		table.insert(s, tab_hi..' '..cwd..'/')
+		if #buflist > 1 then
+			table.insert(s, '('..#buflist..')')
+		end
+
+		table.insert(s, ' ')
+	end
+	table.insert(s, '%#TabLineFill#%T')
+	table.insert(s, '%=')
+	table.insert(s, mode_info_str[vim.api.nvim_get_mode().mode])
+	if vim.fn.tabpagenr('$') > 1 then
+		table.insert(s, '%#TabLine#%999XX')
+	end
+
+	return table.concat(s)
+end
+
+vim.opt.tabline = '%!v:lua.my_tabline()'
+
+vim.api.nvim_create_augroup('myplug_tabline', { clear = true })
+vim.api.nvim_create_autocmd('ModeChanged', {
+	group = 'myplug_tabline',
+	callback = function()
+		vim.cmd('redrawtabline')
+	end
+})
 
 -- +=================+
 -- |  compatibility  |
