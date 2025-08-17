@@ -4,8 +4,13 @@
 -- only support linux by default (for other platforms or custom path, change this variable)
 local tmpbin_dir = vim.fn.expand('~')..'/.tmp'
 
--- TODO reuse terminal
-local function build_with_clangpp(flags, isdebug)
+--- TODO reuse terminal
+--- @param flags? string compile flags
+--- @param isdebug? bool use debug mode
+--- @param force_term? bool forced terminal usage
+local function build_with_clangpp(flags, isdebug, force_term)
+	-- ======== 构造编译命令 ========
+
 	--local cur_dir = vim.fn.expand('%:p:h')
 	local cur_file = vim.fn.expand('%:p')
 	local out_name = vim.fn.expand('%:t:r')
@@ -20,6 +25,15 @@ local function build_with_clangpp(flags, isdebug)
 		tmpbin_dir, out_name,
 		cur_file
 	)
+
+	-- ======== 选择运行命令的方式 ========
+
+	if not force_term then
+		local ok, _ = pcall(vim.cmd.AsyncRun, compile_cmd)
+		if ok then
+			return
+		end
+	end
 
 	vim.api.nvim_command('5new | terminal '..compile_cmd)
 	-- 返回代码窗口
@@ -59,9 +73,16 @@ vim.api.nvim_create_autocmd('FileType', {
 	callback = function ()
 		-- Bclangpp
 		vim.api.nvim_buf_create_user_command(0, 'Bclangpp', function (opts)
-			build_with_clangpp(opts.args, opts.bang)
+			build_with_clangpp(opts.args, opts.bang, false)
 		end, {
 			desc = "Build current source file with clang++",
+			bang = true,
+			nargs = '?'
+		})
+		vim.api.nvim_buf_create_user_command(0, 'TermBclangpp', function (opts)
+			build_with_clangpp(opts.args, opts.bang, true)
+		end, {
+			desc = "Build current source file with clang++ (forced terminal usage)",
 			bang = true,
 			nargs = '?'
 		})

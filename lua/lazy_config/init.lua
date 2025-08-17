@@ -44,3 +44,6 @@ require("lazy").setup({
 	checker = { enabled = true }
 })
 
+-- TODO util to check if has plugin
+-- if require("lazy.core.config").plugins['asyncrun.vim'] ~= nil then
+
