@@ -1,22 +1,27 @@
 local M = {}
 
-function M.combine(n, m)
-	local item1 = 1
-	local item2 = 1
-	local item3 = 1
-	for i = 2, n do
-		item1 = item1 * i
-		if i == m then
-			item3 = item1
-		end
-		if i == n-m then
-			item2 = item1
-		end
+-- TODO use error() rather than assert()
+function M.arrange(n, m)
+	assert(n >= 0 and (0 <= m and m <= n), "param range failure")
+	local res = 1
+	for i = n-m+1, n do
+		res = res * i
 	end
-	return item1 / item2 / item3
+	return res
 end
 
--- use command to register vim.g.C as require('util.math').combine
--- (and so on)
+function M.combine(n, m)
+	assert(n >= 0 and (0 <= m and m <= n), "param range failure")
+	if m > n-m then m = n-m end
+	return M.arrange(n, m) / M.arrange(m, m)
+end
+
+function M.setup()
+	vim.keymap.set("v", "<Leader>=v", [[di<C-r>=<C-r>"<Cr><Esc>]], {desc = "Evaluate Vim Expression"})
+	vim.keymap.set("v", "<Leader>=l", [[di<C-r>=luaeval('<C-r>"')<Cr><Esc>]], {desc = "Evaluate Lua Expression"})
+
+	vim.g.A = M.arrange
+	vim.g.C = M.combine
+end
 
 return M

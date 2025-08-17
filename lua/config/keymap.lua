@@ -59,7 +59,9 @@ map('n', '<leader>w', '<c-w>')
 map('v', '<leader>a', 'c<space><c-r>"<space><esc>')
 
 -- ======== Insert 模式下的 "leader" ========
+-- 用 jl 作为 leader
 
+-- 考虑放到 util.math 中
 map('i', 'jl==', '<esc>vBdi<c-r>=<c-r>"<cr>')
 map('i', 'jl=e', '<space><esc>yBEls=<c-r>=<c-r>0<cr>')
 

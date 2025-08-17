@@ -49,6 +49,8 @@ return {
 					-- now use <C-n> to replace <C-i> (same as <Tab>)
 					--org_cycle = 'za',
 					--org_global_cycle = 'zA',
+					-- org-roam.nvim use prefix + naa/nar
+					--org_add_note = false,
 				},
 			}
 		})

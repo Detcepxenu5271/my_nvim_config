@@ -16,7 +16,7 @@ vim.api.nvim_create_user_command('LspEnable', function(opts)
 	end)
 
 	if not ok then
-		vim.notify("Failed to enable LSP: " .. tostring(err), vim.log.levels.ERROR)
+		vim.notify("Fail to enable LSP: " .. tostring(err), vim.log.levels.ERROR)
 	else
 		vim.notify("Enabled LSP: " .. server_name, vim.log.levels.INFO)
 	end

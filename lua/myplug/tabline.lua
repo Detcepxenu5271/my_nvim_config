@@ -16,10 +16,10 @@ local red = C:getcolor('ql_red')
 local blue = C:getcolor('ql_blue')
 
 -- 定义各模式高亮组
-vim.api.nvim_create_augroup('myplug_echo_status', { clear = true })
+vim.api.nvim_create_augroup('myplug_tabline', { clear = true })
 
 vim.api.nvim_create_autocmd('ColorScheme', {
-	group = 'myplug_echo_status',
+	group = 'myplug_tabline',
 	callback = function()
 		hi(0, "ModeNormal", { fg = lightgrey, bg = blue })
 		hi(0, "ModeNormalRev", { reverse = true, fg = lightgrey, bg = blue })
@@ -54,6 +54,7 @@ local mode_info_str = {
 }
 
 -- ======== Tabline ========
+-- TODO tab 显示不下的解决方案 (目前是右对齐, 左截断, 且不管当前 tab 位置)
 
 local function tab_has_modified_buffers(tabnr)
 	local tabinfo = vim.fn.gettabinfo(tabnr)
@@ -128,7 +129,6 @@ end
 vim.opt.tabline = '%!v:lua.my_tabline()'
 
 -- force redraw when mode changed
-vim.api.nvim_create_augroup('myplug_tabline', { clear = true })
 vim.api.nvim_create_autocmd('ModeChanged', {
 	group = 'myplug_tabline',
 	callback = function()
