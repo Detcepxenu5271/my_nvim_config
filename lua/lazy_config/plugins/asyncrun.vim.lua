@@ -12,7 +12,7 @@ return {
 			pattern = 'AsyncRunStop',
 			callback = function()
 				if vim.g.asyncrun_status == 'success' then
-					require('util.notify').flash_notify('AsyncRun Success', vim.log.levels.INFO)
+					require('util.notify').flash_notify('AsyncRun Succeed!', vim.log.levels.INFO)
 				elseif vim.g.asyncrun_status == 'failure' then
 					require('util.notify').flash_notify('AsyncRun Fail!', vim.log.levels.ERROR)
 				end

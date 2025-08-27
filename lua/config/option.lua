@@ -45,6 +45,9 @@ opt.wildoptions:append('fuzzy')
 
 opt.keywordprg = ':help'
 opt.timeout = false
+if vim.fn.executable('rg') then
+	opt.grepprg = 'rg --vimgrep -S'
+end
 
 -- ======== 内 置 插 件 (builtin) ========
 

@@ -80,6 +80,7 @@ return {
     'selene.yml',
     '.git',
   },
+  -- ======== [BEG] Nvim Runtime Support ========
   on_init = function(client)
     if client.workspace_folders then
       local path = client.workspace_folders[1].name
@@ -126,4 +127,5 @@ return {
   settings = {
     Lua = {}
   }
+  -- ======== [END] Nvim Runtime Support ========
 }

@@ -68,7 +68,10 @@ return {
 		-- TODO 改为自定义命令, 并支持指定大纲层级
 		--vim.api.nvim_create_user_command('OrgFindHeadline', function ()
 		--end, {desc = 'Find Org Headlines'})
-		vim.keymap.set('n', '<Leader>Of', [[:tab sp<CR>:silent grep '^\*+ ' ]]..vim.env.org_path..[[/**/*.org<CR>:tc %:p:h<CR>:copen<CR>]])
+		-- 小写 f: 只搜一级标题
+		vim.keymap.set('n', '<Leader>Of', [[:tab sp<CR>:silent grep -t org '^\* ' ]]..vim.env.org_path..[[<CR>:tc %:p:h<CR>:copen<CR>]])
+		-- 大写 f: 搜全部标题
+		vim.keymap.set('n', '<Leader>OF', [[:tab sp<CR>:silent grep -t org '^\*+ ' ]]..vim.env.org_path..[[<CR>:tc %:p:h<CR>:copen<CR>]])
 		-- open refile.org
 		vim.keymap.set('n', '<Leader>Or', ':sp $org_path/refile.org<CR>')
 

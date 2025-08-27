@@ -15,6 +15,7 @@ local function test_in_and_out(prog, dir, ext_in, ext_out)
 	local pat_in = "\\."..ext_in.."$"
 	local prog_out = prog.."."..ext_out
 
+	local succeed = true
 	for name, type in vim.fs.dir(dir) do
 		local in_name = dir..'/'..name
 		if vim.fn.match(in_name, pat_in) >= 0 and type == 'file' then
@@ -25,10 +26,14 @@ local function test_in_and_out(prog, dir, ext_in, ext_out)
 			local diff_ret = vim.fn.system("diff -ZB "..prog_out.." "..out_name)
 			-- print("diff "..prog_out.." "..out_name)
 			if vim.v.shell_error ~= 0 then
+				succeed = false
 				vim.notify("[TEST "..in_name.."]:\n"..diff_ret)
 				break
 			end
 		end
+	end
+	if succeed then
+		vim.notify("All Test Succeed!")
 	end
 end
 
