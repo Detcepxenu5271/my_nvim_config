@@ -91,6 +91,9 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 		hi(0, 'debugBreakpoint', {bg = C:getcolor('pico8_8')})
 		-- [plugin] flash.nvim
 		hi(0, 'FlashLabel', {fg = C:getcolor('pico8_7'), bg = C:getcolor('pico8_14')})
+		-- [dirty]
+		-- clear TermCursor, because when entering builtin-terminal, the outside cursor color will be changed
+		hi(0, 'TermCursor', {})
 	end
 })
 
