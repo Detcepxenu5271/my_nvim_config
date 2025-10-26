@@ -75,8 +75,26 @@ map('i', '<c-b>', '<left>')
 map('i', '<c-e>', '<end>')
 map('i', '<c-f>', '<right>')
 map('n', '<C-n>', '<C-i>')
-map({'n', 'v', 'o'}, 'j', 'gj')
-map({'n', 'v', 'o'}, 'k', 'gk')
+map({'n', 'v', 'o'}, 'j', function()
+	if vim.v.count == 0 then
+		return 'gj'
+	else
+		return 'j'
+	end
+end, {
+	silent = true,
+	expr = true,
+})
+map({'n', 'v', 'o'}, 'k', function()
+	if vim.v.count == 0 then
+		return 'gk'
+	else
+		return 'k'
+	end
+end, {
+	silent = true,
+	expr = true,
+})
 map({'n', 'v', 'o'}, 'gj', 'j')
 map({'n', 'v', 'o'}, 'gk', 'k')
 map({'n', 'v', 'o'}, 'gH', '0')

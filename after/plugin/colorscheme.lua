@@ -118,26 +118,51 @@ end
 -- set terminal color
 if vim.o.background == 'light' then
 	-- Catppuccin Latte
-	vim.g.terminal_color_0 = "#5C5F77"   -- black
-	vim.g.terminal_color_8 = "#6C6F85"   -- brightBlack
+	--vim.g.terminal_color_0 = "#5C5F77"   -- black
+	--vim.g.terminal_color_8 = "#6C6F85"   -- brightBlack
 
-	vim.g.terminal_color_1 = "#D20F39"   -- red
-	vim.g.terminal_color_9 = "#D20F39"   -- brightRed
+	--vim.g.terminal_color_1 = "#D20F39"   -- red
+	--vim.g.terminal_color_9 = "#D20F39"   -- brightRed
 
-	vim.g.terminal_color_2 = "#40A02B"   -- green
-	vim.g.terminal_color_10 = "#40A02B"  -- brightGreen
+	--vim.g.terminal_color_2 = "#40A02B"   -- green
+	--vim.g.terminal_color_10 = "#40A02B"  -- brightGreen
 
-	vim.g.terminal_color_3 = "#DF8E1D"   -- yellow
-	vim.g.terminal_color_11 = "#DF8E1D"  -- brightYellow
+	--vim.g.terminal_color_3 = "#DF8E1D"   -- yellow
+	--vim.g.terminal_color_11 = "#DF8E1D"  -- brightYellow
 
-	vim.g.terminal_color_4 = "#1E66F5"   -- blue
-	vim.g.terminal_color_12 = "#1E66F5"  -- brightBlue
+	--vim.g.terminal_color_4 = "#1E66F5"   -- blue
+	--vim.g.terminal_color_12 = "#1E66F5"  -- brightBlue
 
-	vim.g.terminal_color_5 = "#EA76CB"   -- purple
-	vim.g.terminal_color_13 = "#EA76CB"   -- brightPurple
+	--vim.g.terminal_color_5 = "#EA76CB"   -- purple
+	--vim.g.terminal_color_13 = "#EA76CB"   -- brightPurple
 
-	vim.g.terminal_color_6 = "#179299"   -- cyan
-	vim.g.terminal_color_14 = "#179299"  -- brightCyan
+	--vim.g.terminal_color_6 = "#179299"   -- cyan
+	--vim.g.terminal_color_14 = "#179299"  -- brightCyan
+
+	--vim.g.terminal_color_7 = "#ACB0BE"   -- white
+	--vim.g.terminal_color_15 = "#BCC0CC"  -- brightWhite
+
+	-- My One Half Light Plus
+	vim.g.terminal_color_0 = "#282A2E"   -- black
+	vim.g.terminal_color_8 = "#373B41"   -- brightBlack
+
+	vim.g.terminal_color_1 = "#A54242"   -- red
+	vim.g.terminal_color_9 = "#CC6666"   -- brightRed
+
+	vim.g.terminal_color_2 = "#859900"   -- green
+	vim.g.terminal_color_10 = "#98C379"  -- brightGreen
+
+	vim.g.terminal_color_3 = "#DE935F"   -- yellow
+	vim.g.terminal_color_11 = "#F0C674"  -- brightYellow
+
+	vim.g.terminal_color_4 = "#30628D"   -- blue
+	vim.g.terminal_color_12 = "#3F74A0"  -- brightBlue
+
+	vim.g.terminal_color_5 = "#68526F"   -- purple
+	vim.g.terminal_color_13 = "#81658A"   -- brightPurple
+
+	vim.g.terminal_color_6 = "#5E8D87"   -- cyan
+	vim.g.terminal_color_14 = "#8ABEB7"  -- brightCyan
 
 	vim.g.terminal_color_7 = "#ACB0BE"   -- white
 	vim.g.terminal_color_15 = "#BCC0CC"  -- brightWhite

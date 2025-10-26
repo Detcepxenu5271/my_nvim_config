@@ -9,6 +9,13 @@ return {
 		require('orgmode').setup({
 			org_adapt_indentation = false,
 			org_agenda_files = vim.env.org_path..'/**/*.org',
+			org_agenda_time_grid = {
+				type = { 'daily', 'today', 'require-timed' },
+				times = { 800, 1000, 1200, 1400, 1600, 1800, 2000 },
+				time_separator = '┄┄┄┄┄',
+				time_label = '┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄',
+			},
+			org_agenda_use_time_grid = true,
 			org_archive_location = vim.env.org_path..'/archive/%s_archive::',
 			org_capture_templates = {
 				d = {

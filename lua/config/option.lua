@@ -27,6 +27,7 @@ opt.splitbelow = true
 opt.splitright = true
 opt.tabstop = 4
 opt.virtualedit:append('block')
+opt.winwidth = 1
 opt.wrapscan = false
 
 -- ======== 文 件 (file) ========

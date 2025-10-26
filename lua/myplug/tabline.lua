@@ -70,11 +70,15 @@ local function tab_has_modified_buffers(tabnr)
 	return false
 end
 
+local tab_names = {}
+
 function _G.my_tabline()
 	-- AI suggest use table rather than string
 	local s = {}
 	local current_tab = vim.fn.tabpagenr()
+	-- for each tabpage
 	for i = 1, vim.fn.tabpagenr('$') do
+		-- ==== 0. Init For Highlight ====
 		-- select the highlighting
 		local tab_hi, tabnr_hi
 		if i == current_tab then
@@ -95,16 +99,26 @@ function _G.my_tabline()
 
 		-- begin seperator
 		table.insert(s, tab_hi..' ')
-		-- tabpage number
+
+		-- ==== 1. Tabpage Number ====
 		table.insert(s, tabnr_hi..'['..i)
 		if tab_has_modified_buffers(i) then
 			table.insert(s, '+')
 		end
 		table.insert(s, ']')
 
-		-- current working director y
-		local cwd = vim.fn.fnamemodify(vim.fn.getcwd(-1, i), ':t')
-		table.insert(s, tab_hi..' '..cwd..'/')
+		-- ==== 2. Tabpage Name ====
+		-- highlight
+		table.insert(s, tab_hi..' ')
+		-- name
+		if tab_names[i] == nil then
+			-- current working director y
+			local cwd = vim.fn.fnamemodify(vim.fn.getcwd(-1, i), ':t')
+			table.insert(s, cwd..'/')
+		else
+			table.insert(s, tab_names[i])
+		end
+		-- number of buffers
 		if #buflist > 1 then
 			table.insert(s, '('..#buflist..')')
 		end
@@ -125,6 +139,28 @@ function _G.my_tabline()
 
 	return table.concat(s)
 end
+
+-- @desc 为当前 tabpage 指定名字 (自定义)
+-- @bang 清空所有 tabpage 的名字
+-- @args 为空字符串时清空名字 (回到默认: 所在目录名)
+--       不为空时表示要设置的名字
+vim.api.nvim_create_user_command('TabpageNameSet', function(opts)
+	-- vim.notify(vim.inspect(opts), vim.log.levels.INFO)
+	local i = vim.fn.tabpagenr()
+	if opts.bang == true then
+		tab_names = {}
+	else
+		if opts.args == "" then
+			tab_names[i] = nil
+		else
+			tab_names[i] = opts.args
+		end
+	end
+end, {
+	desc = 'Set name of current tabpage',
+	bang = true,
+	nargs = '?',
+})
 
 vim.opt.tabline = '%!v:lua.my_tabline()'
 

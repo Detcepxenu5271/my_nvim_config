@@ -23,6 +23,9 @@ return {{
 		},
 		modes = {
 			char = {
+				-- bug: weird behaviour when use fFtT in macro
+				-- https://github.com/folke/flash.nvim/issues/366
+				enabled = false,
 				-- keys = { "f", "F", "t", "T", ";", "," },
 			}
 		}
