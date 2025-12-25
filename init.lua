@@ -16,51 +16,49 @@
 -- |  options  |
 -- +===========+
 
-local opt = vim.opt
-
 -- ======== 外 观 (ui) ========
 
-opt.complete:append('k')
-opt.complete:append('s')
-opt.complete:remove('u')
-opt.completeopt:append('longest')
-opt.cursorline = true
-opt.equalalways = false
-opt.ignorecase = true
-opt.jumpoptions:append('stack')
-opt.lazyredraw = true;
-opt.list = true
-opt.listchars = {tab = '│ ', trail = 'X'}
-opt.nrformats:append('alpha')
-opt.number = true
-opt.relativenumber = true
-opt.shiftround = true
-opt.shiftwidth = 4
-opt.smartcase = true
-opt.smartindent = true
-opt.splitkeep = 'screen'
-opt.splitbelow = true
-opt.splitright = true
-opt.tabstop = 4
-opt.virtualedit:append('block')
-opt.wrapscan = false
+vim.opt.complete:append('k')
+vim.opt.complete:append('s')
+vim.opt.complete:remove('u')
+vim.opt.completeopt:append('longest')
+vim.opt.cursorline = true
+vim.opt.equalalways = false
+vim.opt.ignorecase = true
+vim.opt.jumpoptions:append('stack')
+vim.opt.lazyredraw = true;
+vim.opt.list = true
+vim.opt.listchars = {tab = '│ ', trail = 'X'}
+vim.opt.nrformats:append('alpha')
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.shiftround = true
+vim.opt.shiftwidth = 4
+vim.opt.smartcase = true
+vim.opt.smartindent = true
+vim.opt.splitkeep = 'screen'
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.tabstop = 4
+vim.opt.virtualedit:append('block')
+vim.opt.wrapscan = false
 
 -- ======== 文 件 (file) ========
 
-opt.backup = true
-opt.backupdir:remove('.')
-opt.swapfile = true
-opt.undofile = true
+vim.opt.backup = true
+vim.opt.backupdir:remove('.')
+vim.opt.swapfile = true
+vim.opt.undofile = true
 
 -- ======== 命 令 行 (cmdline) ========
 
-opt.wildmode = {'longest', 'full'}
-opt.wildoptions:append('fuzzy')
+vim.opt.wildmode = {'longest', 'full'}
+vim.opt.wildoptions:append('fuzzy')
 
 -- ======== 其 他 (else) ========
 
-opt.keywordprg = ':help'
-opt.timeout = false
+vim.opt.keywordprg = ':help'
+vim.opt.timeout = false
 
 -- ======== 内 置 插 件 (builtin) ========
 
@@ -83,7 +81,7 @@ local map = vim.keymap.set
 
 -- ======== META ========
 
-map('n', 'M', function()
+vim.keymap.set('n', 'M', function()
 	vim.cmd([[
 		exe 'tabe' stdpath('data')..'/meta.txt'
 		exe 'tc' stdpath('data')
@@ -96,24 +94,24 @@ end, {desc = 'Meta Command'})
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
-map('n', '<leader>', '<nop>')
+vim.keymap.set('n', '<leader>', '<nop>')
 
-map('n', '<leader>/', ":let @/='\\<'..input('Search word: ')..'\\>'<CR>")
-map('n', '<leader>a', 'i<space><esc>la<space><esc>l')
-map('n', '<leader>d', '<nop>')
-map('n', '<leader>dd', [[:exe "lc" substitute(expand('%:p:h'), '^\w\+://', '', '') | pwd<cr>]])
-map('n', '<leader>dt', [[:exe "tc" substitute(expand('%:p:h'), '^\w\+://', '', '') | pwd<cr>]])
-map('n', '<leader>dw', ':tc $ws | pwd<cr>')
-map('n', '<leader>E', '<nop>')
-map('n', '<leader>e', '<nop>')
-map('n', '<leader>eb', ':buffers<cr>:sb<space>')
-map('n', '<leader>Eb', ':buffers<cr>:vert sb<space>')
-map('n', '<leader>er', ':browse oldfiles<cr>')
-map('n', '<leader>ev', ':sp $MYVIMRC<cr>')
-map('n', '<leader>Ev', ':vs $MYVIMRC<cr>')
-map('n', '<Leader>I', ':Inspect<CR>')
-map('n', '<leader>o', '<nop>')
-map('n', '<leader>oc', function ()
+vim.keymap.set('n', '<leader>/', ":let @/='\\<'..input('Search word: ')..'\\>'<CR>")
+vim.keymap.set('n', '<leader>a', 'i<space><esc>la<space><esc>l')
+vim.keymap.set('n', '<leader>d', '<nop>')
+vim.keymap.set('n', '<leader>dd', [[:exe "lc" substitute(expand('%:p:h'), '^\w\+://', '', '') | pwd<cr>]])
+vim.keymap.set('n', '<leader>dt', [[:exe "tc" substitute(expand('%:p:h'), '^\w\+://', '', '') | pwd<cr>]])
+vim.keymap.set('n', '<leader>dw', ':tc $ws | pwd<cr>')
+vim.keymap.set('n', '<leader>E', '<nop>')
+vim.keymap.set('n', '<leader>e', '<nop>')
+vim.keymap.set('n', '<leader>eb', ':buffers<cr>:sb<space>')
+vim.keymap.set('n', '<leader>Eb', ':buffers<cr>:vert sb<space>')
+vim.keymap.set('n', '<leader>er', ':browse oldfiles<cr>')
+vim.keymap.set('n', '<leader>ev', ':sp $MYVIMRC<cr>')
+vim.keymap.set('n', '<leader>Ev', ':vs $MYVIMRC<cr>')
+vim.keymap.set('n', '<Leader>I', ':Inspect<CR>')
+vim.keymap.set('n', '<leader>o', '<nop>')
+vim.keymap.set('n', '<leader>oc', function ()
 	local state = (vim.o.cursorline and 1 or 0) + (vim.o.cursorcolumn and 1 or 0)
 	state = (state + 1) % 3
 	if state == 0 then
@@ -124,8 +122,8 @@ map('n', '<leader>oc', function ()
 		vim.o.cursorline = true; vim.o.cursorcolumn = true
 	end
 end)
-map('n', '<leader>oh', ':noh<cr>', {silent = true})
-map('n', '<leader>on', function()
+vim.keymap.set('n', '<leader>oh', ':noh<cr>', {silent = true})
+vim.keymap.set('n', '<leader>on', function()
 	if vim.o.number then
 		vim.o.number = false
 		vim.o.relativenumber = false
@@ -134,63 +132,86 @@ map('n', '<leader>on', function()
 		vim.o.relativenumber = true
 	end
 end)
-map('n', '<leader>ot', ':let &showtabline = 3-&showtabline | setl showtabline?<cr>')
-map('n', '<leader>ow', ':setl wrap! wrap?<cr>')
-map('n', '<leader>sv', ':source $MYVIMRC<cr>')
-map('n', '<leader>w', '<c-w>')
-map('v', '<leader>a', 'c<space><c-r>"<space><esc>')
+vim.keymap.set('n', '<leader>ot', ':let &showtabline = 3-&showtabline | setl showtabline?<cr>')
+vim.keymap.set('n', '<leader>ow', ':setl wrap! wrap?<cr>')
+vim.keymap.set('n', '<leader>sv', ':source $MYVIMRC<cr>')
+vim.keymap.set('n', '<leader>w', '<c-w>')
+vim.keymap.set('v', '<leader>a', 'c<space><c-r>"<space><esc>')
 
 -- ======== Insert 模式下的 "leader" ========
 
-map('i', 'jl==', '<esc>vBdi<c-r>=<c-r>"<cr>')
-map('i', 'jl=e', '<space><esc>yBEls=<c-r>=<c-r>0<cr>')
+vim.keymap.set('i', 'jl==', '<esc>vBdi<c-r>=<c-r>"<cr>')
+vim.keymap.set('i', 'jl=e', '<space><esc>yBEls=<c-r>=<c-r>0<cr>')
 
 -- ======== 移 动 (motion) ========
 
-map('c', '<c-a>', '<home>')
-map('c', '<c-b>', '<left>')
-map('c', '<c-f>', '<right>')
-map('i', '<c-a>', '<home>')
-map('i', '<c-b>', '<left>')
-map('i', '<c-e>', '<end>')
-map('i', '<c-f>', '<right>')
-map('n', '<C-n>', '<C-i>')
-map({'n', 'v', 'o'}, 'j', 'gj')
-map({'n', 'v', 'o'}, 'k', 'gk')
-map({'n', 'v', 'o'}, 'gj', 'j')
-map({'n', 'v', 'o'}, 'gk', 'k')
-map({'n', 'v', 'o'}, 'gH', '0')
-map({'n', 'v', 'o'}, 'gL', '$')
-map({'n', 'v', 'o'}, 'H', 'g0')
-map({'n', 'v', 'o'}, 'L', 'g$')
+vim.keymap.set('c', '<c-a>', '<home>')
+vim.keymap.set('c', '<c-b>', '<left>')
+vim.keymap.set('c', '<c-f>', '<right>')
+vim.keymap.set('i', '<c-a>', '<home>')
+vim.keymap.set('i', '<c-b>', '<left>')
+vim.keymap.set('i', '<c-e>', '<end>')
+vim.keymap.set('i', '<c-f>', '<right>')
+vim.keymap.set('n', '<C-n>', '<C-i>')
+vim.keymap.set({'n', 'v', 'o'}, 'j', 'gj')
+vim.keymap.set({'n', 'v', 'o'}, 'k', 'gk')
+vim.keymap.set({'n', 'v', 'o'}, 'gj', 'j')
+vim.keymap.set({'n', 'v', 'o'}, 'gk', 'k')
+vim.keymap.set({'n', 'v', 'o'}, 'gH', '0')
+vim.keymap.set({'n', 'v', 'o'}, 'gL', '$')
+vim.keymap.set({'n', 'v', 'o'}, 'H', 'g0')
+vim.keymap.set({'n', 'v', 'o'}, 'L', 'g$')
 
 -- ======== 编 辑 (edit) ========
 
-map('c', '<c-l>', '<del>')
-map('i', '<c-l>', '<del>')
+vim.keymap.set('c', '<c-l>', '<del>')
+vim.keymap.set('i', '<c-l>', '<del>')
 
 -- 补全
-map('i', '<C-o>', '<C-x><C-o>')
+vim.keymap.set('i', '<C-o>', '<C-x><C-o>')
+
+-- nvim-surround 功能简单代替
+vim.keymap.set('v', 'S', function()
+	local ch = vim.fn.nr2char(vim.fn.getchar())
+	local chl, chr
+	if ch=='(' or ch==')' then
+		chl = '('
+		chr = ')'
+	elseif ch=='<' or ch=='>' then
+		chl = '<'
+		chr = '>'
+	elseif ch=='[' or ch==']' then
+		chl = '['
+		chr = ']'
+	elseif ch=='{' or ch=='}' then
+		chl = '{'
+		chr = '}'
+	else
+		chl = ch
+		chr = ch
+	end
+	vim.cmd([[exe "norm! v`>a]]..chr..[[\<Esc>`<i]]..chl..[["]])
+end)
 
 -- ======== 查看 (view) ========
 
-map('n', '<Tab>', 'za')
+vim.keymap.set('n', '<Tab>', 'za')
 
 -- ======== 窗口 (window) ========
 
-map('n', '+', '<c-w>>')
-map('n', '-', '<c-w>-')
-map('n', '<c-h>', '<c-w>h')
-map('n', '<c-j>', '<c-w>j')
-map('n', '<c-k>', '<c-w>k')
-map('n', '<c-l>', '<c-w>l')
-map('n', '=', '<c-w>+')
-map('n', '_', '<c-w><')
+vim.keymap.set('n', '+', '<c-w>>')
+vim.keymap.set('n', '-', '<c-w>-')
+vim.keymap.set('n', '<c-h>', '<c-w>h')
+vim.keymap.set('n', '<c-j>', '<c-w>j')
+vim.keymap.set('n', '<c-k>', '<c-w>k')
+vim.keymap.set('n', '<c-l>', '<c-w>l')
+vim.keymap.set('n', '=', '<c-w>+')
+vim.keymap.set('n', '_', '<c-w><')
 
 -- ======== esc 绑定 ========
 
-map('i', 'jk', '<esc>')
-map('t', 'jk', '<c-\\><c-n>')
+vim.keymap.set('i', 'jk', '<esc>')
+vim.keymap.set('t', 'jk', '<c-\\><c-n>')
 
 -- +================+
 -- |  abbreviation  |
@@ -307,7 +328,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- +===============+
 
 vim.cmd('colorscheme shine')
-opt.background='light'
+vim.opt.background='light'
 vim.cmd([[
 hi Cursor guifg=#f5f5f5
 hi CursorLineNr guibg=#a8a8a8
@@ -387,7 +408,7 @@ endfunction
 set foldtext=FoldText()
 
 " statusline
-function MyStatusLine()
+function! MyStatusLine()
 	let s:statusline = ''
 
 	if win_getid() == g:statusline_winid
