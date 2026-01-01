@@ -17,8 +17,8 @@ function M.combine(n, m)
 end
 
 function M.setup()
-	vim.keymap.set("v", "<Leader>=v", [[di<C-r>=<C-r>"<Cr><Esc>]], {desc = "Evaluate Vim Expression"})
-	vim.keymap.set("v", "<Leader>=l", [[di<C-r>=luaeval('<C-r>"')<Cr><Esc>]], {desc = "Evaluate Lua Expression"})
+	vim.keymap.set("v", "<Leader>=v", [[s<C-r>=<C-r>"<Cr><Esc>]], {desc = "Evaluate Vim Expression"})
+	vim.keymap.set("v", "<Leader>=l", [[s<C-r>=luaeval('<C-r>"')<Cr><Esc>]], {desc = "Evaluate Lua Expression"})
 
 	vim.g.A = M.arrange
 	vim.g.C = M.combine

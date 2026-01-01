@@ -1,6 +1,6 @@
 -- neovide config
 if vim.g.neovide then
-	vim.o.guifont = 'UbuntuMono Nerd Font,LXGW WenKai Mono:h15'
+	vim.o.guifont = 'UbuntuMono Nerd Font,LXGW WenKai Mono:h14'
 	vim.g.neovide_opacity = 0.9
 	vim.g.neovide_normal_opacity = 0.9
 	-- Animations
