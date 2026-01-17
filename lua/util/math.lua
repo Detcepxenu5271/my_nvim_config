@@ -17,9 +17,7 @@ function M.combine(n, m)
 end
 
 function M.setup()
-	vim.keymap.set("v", "<Leader>=v", [[s<C-r>=<C-r>"<Cr><Esc>]], {desc = "Evaluate Vim Expression"})
-	vim.keymap.set("v", "<Leader>=l", [[s<C-r>=luaeval('<C-r>"')<Cr><Esc>]], {desc = "Evaluate Lua Expression"})
-
+	-- shortname of combinatorics functions
 	vim.g.A = M.arrange
 	vim.g.C = M.combine
 end

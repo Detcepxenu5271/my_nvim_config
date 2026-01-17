@@ -36,6 +36,7 @@ opt.backup = true
 opt.backupdir:remove('.')
 opt.swapfile = true
 opt.undofile = true
+opt.fileencodings = 'ucs-bom,utf-8,cp936,default,latin1'
 
 -- ======== 命 令 行 (cmdline) ========
 

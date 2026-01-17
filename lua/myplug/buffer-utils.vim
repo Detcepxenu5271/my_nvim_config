@@ -14,8 +14,9 @@ function! BufMakeScratch(bn)
 	" ?考虑使用 paste 模式解决复制的问题
 	"call setbufvar(a:bn, '&autoindent', 0)
 	"call setbufvar(a:bn, '&smartindent', 0)
-	call setbufvar(a:bn, '&number', 0)
-	call setbufvar(a:bn, '&relativenumber', 0)
+	" 没用, local to window 而不是 buffer
+	"call setbufvar(a:bn, '&number', 0)
+	"call setbufvar(a:bn, '&relativenumber', 0)
 	" BUG 对同一个 buffer 重复调用当前函数, 会创建多个相同的 autocmd
 	exe 'autocmd BufWinEnter <buffer='..a:bn..'> setl winhighlight=Normal:ScratchNormal,EndOfBuffer:ScratchEndOfBuffer'
 	" 不管用, 因为选项是 local to window 而不是 local to buffer

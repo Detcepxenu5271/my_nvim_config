@@ -18,7 +18,6 @@ vim.g.maplocalleader = "\\"
 map('n', '<leader>', '<nop>')
 
 map('n', '<leader>/', ":let @/='\\<'..input('Search word: ')..'\\>'<CR>")
-map('n', '<leader>a', 'i<space><esc>la<space><esc>l')
 map('n', '<leader>d', '<nop>')
 map('n', '<leader>dd', [[:exe "lc" substitute(expand('%:p:h'), '^\w\+://', '', '') | pwd<cr>]])
 map('n', '<leader>dt', [[:exe "tc" substitute(expand('%:p:h'), '^\w\+://', '', '') | pwd<cr>]])
@@ -56,14 +55,16 @@ end)
 map('n', '<leader>ot', ':let &showtabline = 3-&showtabline | setl showtabline?<cr>')
 map('n', '<leader>ow', ':setl wrap! wrap?<cr>')
 map('n', '<leader>w', '<c-w>')
-map('v', '<leader>a', 'c<space><c-r>"<space><esc>')
 
 -- ======== Insert 模式下的 "leader" ========
 -- 用 jl 作为 leader
 
--- 考虑放到 util.math 中
+-- 原: 需要 setup util.math
+-- 现: 设计上 util 要在脚本中主动调用, 而表达式求值常用, 直接附带
 map('i', 'jl==', '<esc>vBdi<c-r>=<c-r>"<cr>')
 map('i', 'jl=e', '<space><esc>yBEls=<c-r>=<c-r>0<cr>')
+map("v", "<Leader>=v", [[s<C-r>=<C-r>"<Cr><Esc>]], {desc = "Evaluate Vim Expression"})
+map("v", "<Leader>=l", [[s<C-r>=luaeval('<C-r>"')<Cr><Esc>]], {desc = "Evaluate Lua Expression"})
 
 -- ======== 移 动 (motion) ========
 
@@ -119,6 +120,8 @@ map('n', '<Tab>', 'za')
 map('n', '+', '<c-w>>')
 map('n', '-', '<c-w>-')
 map('n', '<c-h>', '<c-w>h')
+-- 终端中, <C-H> 和 <BS> 可能是一个键码
+map('n', '<BS>', '<c-w>h')
 map('n', '<c-j>', '<c-w>j')
 map('n', '<c-k>', '<c-w>k')
 map('n', '<c-l>', '<c-w>l')

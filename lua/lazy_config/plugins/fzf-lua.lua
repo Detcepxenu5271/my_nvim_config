@@ -73,5 +73,9 @@ return {
 			}
 		})
 	end
+	-- (may) BUG:
+	-- Windows 下, 使用 fzf-lua 窗口搜索时, shellslash 会被设为 false
+	-- 且有时候会被设置回 true (没搞清楚时机)
+	-- 目前解决方案: 如果遇到问题, 手动设置回去
 }
 

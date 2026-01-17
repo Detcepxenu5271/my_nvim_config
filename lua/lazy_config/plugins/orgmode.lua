@@ -37,12 +37,13 @@ return {
 			-- entities: only see as latex in $$, \(\), ...
 			-- ATTENTION! If use nvim-treesitter, set highlight.additional_vim_regex_highlighting to false or add org to the list
 			--            Because now inline latex requires vim regex syntax
-			org_highlight_latex_and_related = "entities",
+			-- org_highlight_latex_and_related = "entities",
 			org_id_link_to_org_use_id = true,
 			--org_indent_mode_turns_off_org_adapt_indentation = true,
 			--org_indent_mode_turns_on_hiding_stars = true,
 			org_startup_indented = true,
 			org_tags_column = 0,
+			org_tags_exclude_from_inheritance = {'cur', 'refile'},
 			org_todo_keywords = {'TODO(t)', 'NEXT(n)', '|', 'DONE(d)', 'CANCEL(c)'},
 			org_use_tag_inheritance = true,
 			mappings = {

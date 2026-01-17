@@ -1,6 +1,6 @@
 -- neovide config
 if vim.g.neovide then
-	vim.o.guifont = 'UbuntuMono Nerd Font,LXGW WenKai Mono:h14'
+	vim.o.guifont = 'UbuntuMono Nerd Font,LXGW WenKai Mono:h15'
 	vim.g.neovide_opacity = 0.9
 	vim.g.neovide_normal_opacity = 0.9
 	-- Animations
@@ -14,4 +14,7 @@ if vim.g.neovide then
 	-- IME (输入法)
 	-- ?BUG: 只显示候选词结果, 不显示输入过程
 	vim.g.neovide_input_ime = true
+	vim.keymap.set({"n", "v"}, "<C-=>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>", {silent = true})
+	vim.keymap.set({"n", "v"}, "<C-->", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>", {silent = true})
+	vim.keymap.set({"n", "v"}, "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>", {silent = true})
 end

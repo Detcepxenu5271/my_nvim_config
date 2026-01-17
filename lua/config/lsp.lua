@@ -25,7 +25,7 @@ end, {
 	complete = function(ArgLead, CmdLine, CursorPos)
 		-- 补全列表
 		-- TODO 自动获取
-		local servers = {'clangd', 'lua_ls', 'vimls', 'pico8_ls', 'pylsp'}
+		local servers = {'clangd', 'lua_ls', 'ts_ls', 'vimls', 'pico8_ls', 'pylsp'}
 
 		-- 过滤匹配项
 		local matches = {}
