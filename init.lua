@@ -167,8 +167,9 @@ vim.keymap.set({'n', 'v', 'o'}, 'L', 'g$')
 vim.keymap.set('c', '<c-l>', '<del>')
 vim.keymap.set('i', '<c-l>', '<del>')
 
--- 补全
+-- 补全 (原按键不常用)
 vim.keymap.set('i', '<C-o>', '<C-x><C-o>')
+vim.keymap.set('i', '<C-]>', '<C-x><C-]>')
 
 -- nvim-surround 功能简单代替
 vim.keymap.set('v', 'S', function()
@@ -186,11 +187,14 @@ vim.keymap.set('v', 'S', function()
 	elseif ch=='{' or ch=='}' then
 		chl = '{'
 		chr = '}'
+	elseif ch == "'" then
+		chl = "''"
+		chr = "''"
 	else
 		chl = ch
 		chr = ch
 	end
-	vim.cmd([[exe "norm! v`>a]]..chr..[[\<Esc>`<i]]..chl..[["]])
+	vim.cmd("exe 'norm! `>a"..chr.."`<i"..chl.."'")
 end)
 
 -- ======== 查看 (view) ========
