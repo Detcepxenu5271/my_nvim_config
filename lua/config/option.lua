@@ -19,7 +19,8 @@ opt.nrformats:append('alpha')
 opt.number = true
 opt.relativenumber = true
 opt.shiftround = true
-opt.shiftwidth = 4
+-- shiftwidth=0: use tabstop
+opt.shiftwidth = 0
 opt.smartcase = true
 opt.smartindent = true
 opt.splitkeep = 'screen'

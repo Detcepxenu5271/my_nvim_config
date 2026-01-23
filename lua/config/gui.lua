@@ -14,7 +14,13 @@ if vim.g.neovide then
 	-- IME (输入法)
 	-- ?BUG: 只显示候选词结果, 不显示输入过程
 	vim.g.neovide_input_ime = true
-	vim.keymap.set({"n", "v"}, "<C-=>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>", {silent = true})
-	vim.keymap.set({"n", "v"}, "<C-->", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>", {silent = true})
-	vim.keymap.set({"n", "v"}, "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>", {silent = true})
+	vim.keymap.set({"n"}, "<C-=>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>", {silent = true})
+	vim.keymap.set({"n", "v", "i"}, "<C-ScrollWheelUp>", function()
+		vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.05
+	end, {silent = true})
+	vim.keymap.set({"n"}, "<C-->", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>", {silent = true})
+	vim.keymap.set({"n", "v", "i"}, "<C-ScrollWheelDown>", function()
+		vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.05
+	end, {silent = true})
+	vim.keymap.set({"n"}, "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>", {silent = true})
 end

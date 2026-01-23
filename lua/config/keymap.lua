@@ -68,13 +68,10 @@ map("v", "<Leader>=l", [[s<C-r>=luaeval('<C-r>"')<Cr><Esc>]], {desc = "Evaluate 
 
 -- ======== 移 动 (motion) ========
 
-map('c', '<c-a>', '<home>')
-map('c', '<c-b>', '<left>')
-map('c', '<c-f>', '<right>')
-map('i', '<c-a>', '<home>')
-map('i', '<c-b>', '<left>')
-map('i', '<c-e>', '<end>')
-map('i', '<c-f>', '<right>')
+map({'i', 'c'}, '<c-a>', '<home>')
+map({'i'}, '<c-e>', '<end>')
+map({'i', 'c'}, '<c-b>', '<left>')
+map({'i', 'c'}, '<c-f>', '<right>')
 map('n', '<C-n>', '<C-i>')
 map({'n', 'v', 'o'}, 'j', function()
 	if vim.v.count == 0 then
@@ -105,11 +102,11 @@ map({'n', 'v', 'o'}, 'L', 'g$')
 
 -- ======== 编 辑 (edit) ========
 
-map('c', '<c-l>', '<del>')
-map('i', '<c-l>', '<del>')
+map({'i', 'c'}, '<c-l>', '<del>')
 
 -- 补全
 map('i', '<C-o>', '<C-x><C-o>')
+map('i', '<C-]>', '<C-x><C-]>')
 
 -- ======== 查看 (view) ========
 
@@ -117,8 +114,6 @@ map('n', '<Tab>', 'za')
 
 -- ======== 窗口 (window) ========
 
-map('n', '+', '<c-w>>')
-map('n', '-', '<c-w>-')
 map('n', '<c-h>', '<c-w>h')
 -- 终端中, <C-H> 和 <BS> 可能是一个键码
 map('n', '<BS>', '<c-w>h')
@@ -126,6 +121,8 @@ map('n', '<c-j>', '<c-w>j')
 map('n', '<c-k>', '<c-w>k')
 map('n', '<c-l>', '<c-w>l')
 map('n', '=', '<c-w>+')
+map('n', '-', '<c-w>-')
+map('n', '+', '<c-w>>')
 map('n', '_', '<c-w><')
 
 -- ======== esc 绑定 ========

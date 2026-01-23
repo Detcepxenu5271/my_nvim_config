@@ -120,9 +120,10 @@ return {
 		sources = {
 			default = { 'lsp', 'buffer', 'snippets', 'path' },
 			-- orgmode: https://github.com/nvim-orgmode/orgmode
-			per_filetype = {
-				org = {'orgmode', 'buffer', 'snippets', 'path'}
-			},
+			-- [Experimental] use LSP, disable custom source settings
+			-- per_filetype = {
+			-- 	org = {'orgmode', 'buffer', 'snippets', 'path'}
+			-- },
 			providers = {
 				path = {
 					-- from cwd instead of current buffer's directory
@@ -135,7 +136,7 @@ return {
 				orgmode = {
 					name = 'Orgmode',
 					module = 'orgmode.org.autocompletion.blink',
-					-- fallbacks 似乎没有作用, 暂时不知道为什么
+					-- fallbacks 似乎没有作用, 暂时不知道为什么, 所以放到了 per_filetype 里
 					--fallbacks = { 'buffer', 'snippets', 'path' },
 				},
 			},
