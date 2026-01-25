@@ -131,7 +131,8 @@ function _G.my_tabline()
 	-- right-align
 	table.insert(s, '%=')
 	-- mode status
-	table.insert(s, mode_info_str[vim.api.nvim_get_mode().mode])
+	-- XXX The change of mode status will cause bad performance when repeating batch commands (e.g. :norm)
+	-- table.insert(s, mode_info_str[vim.api.nvim_get_mode().mode])
 	-- close tab label
 	if vim.fn.tabpagenr('$') > 1 then
 		table.insert(s, '%#TabLine#%999XX')
@@ -165,9 +166,10 @@ end, {
 vim.opt.tabline = '%!v:lua.my_tabline()'
 
 -- force redraw when mode changed
-vim.api.nvim_create_autocmd('ModeChanged', {
-	group = 'myplug_tabline',
-	callback = function()
-		vim.cmd('redrawtabline')
-	end
-})
+-- XXX The change of mode status will cause bad performance when repeating batch commands (e.g. :norm)
+-- vim.api.nvim_create_autocmd('ModeChanged', {
+-- 	group = 'myplug_tabline',
+-- 	callback = function()
+-- 		vim.cmd('redrawtabline')
+-- 	end
+-- })

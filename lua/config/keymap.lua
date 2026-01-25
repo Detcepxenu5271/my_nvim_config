@@ -69,30 +69,16 @@ map("v", "<Leader>=l", [[s<C-r>=luaeval('<C-r>"')<Cr><Esc>]], {desc = "Evaluate 
 -- ======== 移 动 (motion) ========
 
 map({'i', 'c'}, '<c-a>', '<home>')
-map({'i'}, '<c-e>', '<end>')
-map({'i', 'c'}, '<c-b>', '<left>')
-map({'i', 'c'}, '<c-f>', '<right>')
+-- use <expr> because function return the key rather than execute it
+map({'i'}, '<C-e>', function() return vim.fn.pumvisible() == 0 and '<End>' or '<C-e>' end, { expr = true, })
+map({'i'}, '<c-b>', '<left>')
+map({'i'}, '<c-f>', '<right>')
+map({'c'}, '<c-b>', function() return vim.fn.pumvisible() == 0 and '<Left>' or '<Up>' end, { expr = true, })
+map({'c'}, '<c-f>', function() return vim.fn.pumvisible() == 0 and '<Right>' or '<Down>' end, { expr = true, })
+-- pair of <C-o> (older) and <C-n> (newer), since <C-i> and <Tab> may be the same, and I map <Tab> to za
 map('n', '<C-n>', '<C-i>')
-map({'n', 'v', 'o'}, 'j', function()
-	if vim.v.count == 0 then
-		return 'gj'
-	else
-		return 'j'
-	end
-end, {
-	silent = true,
-	expr = true,
-})
-map({'n', 'v', 'o'}, 'k', function()
-	if vim.v.count == 0 then
-		return 'gk'
-	else
-		return 'k'
-	end
-end, {
-	silent = true,
-	expr = true,
-})
+map({'n', 'v', 'o'}, 'j', function() return vim.v.count == 0 and 'gj' or 'j' end, { expr = true, })
+map({'n', 'v', 'o'}, 'k', function() return vim.v.count == 0 and 'gk' or 'k' end, { expr = true, })
 map({'n', 'v', 'o'}, 'gj', 'j')
 map({'n', 'v', 'o'}, 'gk', 'k')
 map({'n', 'v', 'o'}, 'gH', '0')

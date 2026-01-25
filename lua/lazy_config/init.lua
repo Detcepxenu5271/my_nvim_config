@@ -21,10 +21,10 @@ vim.opt.rtp:prepend(lazypath)
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
 if vim.g.mapleader == nil then
-		vim.g.mapleader = " "
+	vim.g.mapleader = " "
 end
 if vim.g.maplocalleader == nil then
-		vim.g.maplocalleader = "\\"
+	vim.g.maplocalleader = "\\"
 end
 
 -- Setup lazy.nvim
@@ -41,7 +41,7 @@ require("lazy").setup({
 	-- colorscheme that will be used when installing plugins.
 	install = { colorscheme = { "quietlight", "myshine", "default" } },
 	-- automatically check for plugin updates
-	checker = { enabled = true }
+	checker = { enabled = false }
 })
 
 -- TODO util to check if has plugin

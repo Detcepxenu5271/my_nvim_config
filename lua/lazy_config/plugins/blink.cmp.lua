@@ -49,12 +49,14 @@ return {
 			-- Enter to accept/cancel (if use Windows Terminal
 			--     (cancel returns to the initial input, while 'hide' remains the current text)
 			-- Ctrl-B/F to scroll documentation up/down
-			-- Ctrl-E also stops snippet
+			-- Ctrl-E is cancel rather than hide, and also stops snippet
 			['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
-			['<C-e>'] = { 'hide', vim.snippet.stop, 'fallback' },
+			-- ['<C-e>'] = { 'hide', vim.snippet.stop, 'fallback' },
+			['<C-e>'] = { 'cancel', vim.snippet.stop, 'fallback' },
 			['<C-y>'] = { 'select_and_accept', 'fallback' },
 			['<CR>'] = { 'accept', 'fallback' },
-			['<S-CR>'] = { 'cancel', 'hide_signature', 'fallback' },
+			-- ['<S-CR>'] = { 'cancel', 'hide_signature', 'fallback' },
+			['<S-CR>'] = { 'cancel', vim.snippet.stop, 'fallback' },
 
 			['<Up>'] = { 'select_prev', 'fallback' },
 			['<Down>'] = { 'select_next', 'fallback' },

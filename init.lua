@@ -34,7 +34,7 @@ require 'myplug'
 -- 注意 lazy 配置模块不要与 lazy 重名
 require 'lazy_config'
 
--- ======== lazy.nvim ========
+-- ======== local ========
 -- local config
 
 pcall(require, 'local')

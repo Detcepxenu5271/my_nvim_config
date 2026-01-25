@@ -13,6 +13,10 @@ function M.run_script(script)
 	end
 	-- split shebang and script body
 	local shebang = string.sub(script, 0, first_nl-1)
+	-- check if shebang is legal
+	if shebang[1] ~= '#' or shebang[2] ~= '!' then
+		return "[ERROR] illegal shebang"
+	end
 	local body = string.sub(script, first_nl+1)
 	-- split command and arguments from shebang
 	local cmd = vim.split(string.sub(shebang, 3), '%s+', {trimempty=true})
@@ -30,7 +34,7 @@ function M.setup()
 	vim.keymap.set('v', '<Leader>r', function()
 		vim.cmd([[norm! y'>]])
 		vim.fn.setreg('"', M.run_script(vim.fn.getreg('"')))
-		vim.cmd([[norm! p]])
+		vim.cmd([[iput "]])
 	end)
 end
 

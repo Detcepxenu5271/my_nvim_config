@@ -8,6 +8,18 @@ return {
 		-- Setup orgmode
 		require('orgmode').setup({
 			org_adapt_indentation = false,
+			org_agenda_custom_commands = {
+				T = {
+					description = 'TODO (not include NEXT)',
+					types = {
+						{
+							type = 'tags_todo',
+							match = '/TODO',
+							org_agenda_overriding_header = 'Only todos',
+						},
+					},
+				},
+			},
 			org_agenda_files = vim.env.org_path..'/**/*.org',
 			org_agenda_time_grid = {
 				type = { 'daily', 'today', 'require-timed' },
@@ -77,7 +89,7 @@ return {
 		--vim.api.nvim_create_user_command('OrgFindHeadline', function ()
 		--end, {desc = 'Find Org Headlines'})
 		-- 小写 f: 搜全部标题
-		vim.keymap.set('n', '<Leader>OF', [[:tab sp<CR>:silent grep -t org '^\*+ ' ]]..vim.env.org_path..[[<CR>:tc %:p:h<CR>:copen<CR>]])
+		vim.keymap.set('n', '<Leader>Of', [[:tab sp<CR>:silent grep -t org '^\*+ ' ]]..vim.env.org_path..[[<CR>:tc %:p:h<CR>:copen<CR>]])
 		-- open refile.org
 		vim.keymap.set('n', '<Leader>Or', ':sp $org_path/refile.org<CR>')
 

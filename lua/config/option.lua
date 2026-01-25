@@ -5,7 +5,12 @@ local opt = vim.opt
 opt.complete:append('k')
 opt.complete:append('s')
 opt.complete:remove('u')
-opt.completeopt:append('longest')
+-- when 0.12, fuzzy may affect the collection of candidates
+-- longest may conflict with fuzzy
+opt.completeopt = {'menuone', 'popup', 'fuzzy'}
+-- opt.completeopt:append('longest')
+-- opt.completeopt:remove('menu')
+-- opt.completeopt:append('menuone')
 opt.cursorline = true
 opt.equalalways = false
 opt.ignorecase = true
