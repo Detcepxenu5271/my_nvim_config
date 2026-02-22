@@ -1,22 +1,26 @@
-local myplug_path = vim.fn.stdpath('config')..'/lua/myplug'
+local function get_slash()
+	return vim.o.shellslash and '/' or '\\'
+end
+
+local myplug_path = vim.fn.stdpath('config')..get_slash()..'lua'..get_slash()..'myplug'
 
 -- ==========================
 -- | sourced/setup at start |
 -- ==========================
 
 -- basic utils
-vim.cmd('source '..myplug_path..'/buffer-utils.vim')
+vim.cmd('source '..myplug_path..get_slash()..'buffer-utils.vim')
 require'myplug.buffer-utils'
 require'myplug.misc-utils'
 
 -- language utils
-vim.cmd('source '..myplug_path..'/markdown-utils.vim')
+vim.cmd('source '..myplug_path..get_slash()..'markdown-utils.vim')
 require'myplug.cxx-utils'
 
 -- UI
-vim.cmd('source '..myplug_path..'/statusline.vim')
+vim.cmd('source '..myplug_path..get_slash()..'statusline.vim')
 require'myplug.tabline'
-vim.cmd('source '..myplug_path..'/foldtext.vim')
+vim.cmd('source '..myplug_path..get_slash()..'foldtext.vim')
 
 -- others
 require'myplug.workspace-vim_compatible'

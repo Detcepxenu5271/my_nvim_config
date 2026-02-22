@@ -33,7 +33,7 @@ return {
 				d = {
 					description = "Default",
 					template = "* %^{PROMPT}",
-					target = vim.env.org_path.."/refile.org"
+					target = vim.env.org_path.."/_refile.org"
 				},
 				r = {
 					-- https://nvim-orgmode.github.io/tutorial#captures
@@ -42,7 +42,7 @@ return {
 					target = vim.env.org_path.."/repos.org",
 				}
 			},
-			org_default_notes_file = vim.env.org_path..'/refile.org',
+			org_default_notes_file = vim.env.org_path..'/_refile.org',
 			org_hide_emphasis_markers = true,
 			-- 'native' or 'entities':
 			-- native: see org as latex
@@ -55,9 +55,9 @@ return {
 			--org_indent_mode_turns_on_hiding_stars = true,
 			org_startup_indented = true,
 			org_tags_column = 0,
-			org_tags_exclude_from_inheritance = {'cur', 'refile'},
+			-- org_tags_exclude_from_inheritance = {'cur', 'refile'},
 			org_todo_keywords = {'TODO(t)', 'NEXT(n)', '|', 'DONE(d)', 'CANCEL(c)'},
-			org_use_tag_inheritance = true,
+			org_use_tag_inheritance = false,
 			mappings = {
 				prefix = '<LocalLeader>',
 				org_return_uses_meta_return = false,
@@ -91,11 +91,10 @@ return {
 		-- 小写 f: 搜全部标题
 		vim.keymap.set('n', '<Leader>Of', [[:tab sp<CR>:silent grep -t org '^\*+ ' ]]..vim.env.org_path..[[<CR>:tc %:p:h<CR>:copen<CR>]])
 		-- open refile.org
-		vim.keymap.set('n', '<Leader>Or', ':sp $org_path/refile.org<CR>')
-
-		vim.keymap.set('ca', 'pott', ":\\zs\\w\\+\\ze:<C-r>=Eatchar('\\s')<CR>", {desc = 'Pattern of Org Tag'})
-
+		vim.keymap.set('n', '<Leader>Or', ':sp $org_path/_refile.org<CR>')
 		-- [Experimental] LSP
 		vim.lsp.enable('org')
+
+		-- [Notice] other file-related settings are in after/ftplugin/org.lua
 	end,
 }

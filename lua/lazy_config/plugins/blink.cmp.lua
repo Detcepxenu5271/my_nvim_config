@@ -1,5 +1,16 @@
 -- BUG? 在 return 里定义 config = function() ... end
 --      会导致 blink.cmp 无法触发
+-- BUG cond + nvim-orgmode 编辑 org 文件中的 link ( [[url][desc]] )
+--     cond + Windows
+--     cond + url 是 http(s) 链接
+--     bug  = 插入模式输入文本时容易长时间卡住 (10s+)
+--            verbose 推测和 autocommand call s:LoadFTPlugin() 后,
+--            在 runtime path 中找不到
+--            ftplugin/blink-cmp-menu[.]{vim,lua} 等文件有关
+--     temp = {x} 用 nvim-orgmode 的 org_insert_link 插入并不修改
+--                不完全有用, 因为在 link 外也能触发卡死
+--            或编辑 link 时用以下快捷键临时禁用 blink.cmp
+--            {*} 或直接对所有 org 禁用
 vim.keymap.set('n', '<Leader>oC', function()
 	if vim.b.completion == false then
 		vim.b.completion = true
@@ -123,9 +134,11 @@ return {
 			default = { 'lsp', 'buffer', 'snippets', 'path' },
 			-- orgmode: https://github.com/nvim-orgmode/orgmode
 			-- [Experimental] use LSP, disable custom source settings
-			-- per_filetype = {
-			-- 	org = {'orgmode', 'buffer', 'snippets', 'path'}
-			-- },
+			per_filetype = {
+				org = {'buffer', 'snippets', 'path'}
+				-- currently 'lsp' and 'orgmode' causes the same BUG (stall when editing link)
+				-- org = {'lsp', 'buffer', 'snippets', 'path'}
+			},
 			providers = {
 				path = {
 					-- from cwd instead of current buffer's directory

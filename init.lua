@@ -28,6 +28,11 @@ require 'config.gui'
 
 require 'myplug'
 
+-- ======== notmyplug ========
+-- random plugins originally from others (may be modified by myself)
+
+require 'notmyplug'
+
 -- ======== lazy.nvim ========
 -- plugin management
 

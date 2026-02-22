@@ -6,9 +6,11 @@ M.colornames = {
 	-- from nvim-quietlight
 	-- TODO 改为 palette 的颜色名称
 	ql_black = '#14161b',
+	ql_black_50 = '#444963',
 	ql_white = '#f5f5f5',
-	ql_lightgrey = '#d3d3d3',
-	ql_verylightgrey = '#e8e8e8',
+	ql_gray_210 = '#c2c2c2',
+	ql_lightgray = '#d3d3d3',
+	ql_verylightgray = '#e8e8e8',
 	ql_purple = '#7a3e9d',
 	ql_lightpurple = '#c4b7d7',
 	ql_darkpurple = '#705697',
@@ -32,15 +34,15 @@ M.colornames = {
 	pico8_2 = '#7E2553', -- dark magenta
 	pico8_3 = '#008751', -- dark green
 	pico8_4 = '#AB5236', -- brown
-	pico8_5 = '#5F574F', -- dark grey
-	pico8_6 = '#C2C3C7', -- light grey
+	pico8_5 = '#5F574F', -- dark gray
+	pico8_6 = '#C2C3C7', -- light gray
 	pico8_7 = '#FFF1E8', -- white
 	pico8_8 = '#FF004D', -- red
 	pico8_9 = '#FFA300', -- orange
 	pico8_10 = '#FFEC27', -- yellow
 	pico8_11 = '#00E436', -- green
 	pico8_12 = '#29ADFF', -- blue
-	pico8_13 = '#83769C', -- grey purple
+	pico8_13 = '#83769C', -- gray purple
 	pico8_14 = '#FF77A8', -- pink
 	pico8_15 = '#FFCCAA', -- light orange
 }

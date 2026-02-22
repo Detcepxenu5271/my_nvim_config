@@ -16,14 +16,18 @@ local util = require 'lspconfig.util'
 -- DIRTY
 local pico8_ls_cmd
 if vim.fn.has('win32') and string.find(vim.o.shell, 'bash') then
-	pico8_ls_cmd = {'node', 'C:/msys64/home/22961/software/pico8-ls/server/out/server.js', '--stdio'}
+	-- pico8_ls_cmd = {'node', 'C:/msys64/home/22961/software/pico8-ls/server/out/server.js', '--stdio'}
+	-- [Now] or use pico8-ls directly. pico8-ls.bat call:
+	--       "node D:\Environment\pollywoggames.pico8-ls-0.6.1\server\out-min\main.js --stdio "
+	--       which is copied from VSCode extension file
+	pico8_ls_cmd = {'pico8-ls.bat', '--stdio'}
 else
 	pico8_ls_cmd = {'pico8-ls', '--stdio'}
 end
 
 return {
-	cmd = pico8_ls_cmd,
-	-- cmd = { 'pico8-ls', '--stdio' },
+	-- cmd = pico8_ls_cmd,
+	cmd = { 'pico8-ls', '--stdio' },
 	filetypes = { 'pico8' },
 	root_dir = function(bufnr, on_dir)
 		local fname = vim.api.nvim_buf_get_name(bufnr)

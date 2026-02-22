@@ -2,9 +2,9 @@
 
 M = {}
 
--- @desc Run script with shebang
--- @param script string Full script to run, first line is shebang (starts with #!)
--- @return string stdin or stderr (if not empty)
+--@desc Run script with shebang
+--@param script string Full script to run, first line is shebang (starts with #!)
+--@return string stdin or stderr (if not empty)
 function M.run_script(script)
 	-- locate the first newline (end of shebang)
 	local first_nl, _ = string.find(script, "\n")
@@ -14,7 +14,7 @@ function M.run_script(script)
 	-- split shebang and script body
 	local shebang = string.sub(script, 0, first_nl-1)
 	-- check if shebang is legal
-	if shebang[1] ~= '#' or shebang[2] ~= '!' then
+	if string.sub(shebang, 1, 2) ~= '#!' then
 		return "[ERROR] illegal shebang"
 	end
 	local body = string.sub(script, first_nl+1)
@@ -36,6 +36,7 @@ function M.setup()
 		vim.fn.setreg('"', M.run_script(vim.fn.getreg('"')))
 		vim.cmd([[iput "]])
 	end)
+	vim.api.nvim_create_user_command('HelpTagsRefresh', 'helptags $MYVIMRC/../doc', {desc = "Generate tags for help file in my config's doc"})
 end
 
 return M

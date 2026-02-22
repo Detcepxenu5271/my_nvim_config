@@ -1,5 +1,5 @@
-vim.wo.conceallevel = 2
-vim.wo.foldlevel = 1
+vim.opt_local.conceallevel = 2
+vim.opt_local.foldlevel = 1
 
 vim.keymap.set('n', '<LocalLeader>b', 'viWv`>a**<Esc>`<i**<Esc>', {buffer = true})
 vim.keymap.set('n', '<LocalLeader>i', 'viWv`>a*<Esc>`<i*<Esc>', {buffer = true})

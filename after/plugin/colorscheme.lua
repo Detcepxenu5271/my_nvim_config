@@ -11,42 +11,46 @@ local hi = vim.api.nvim_set_hl
 vim.api.nvim_create_autocmd('ColorScheme', {
 	pattern = 'quietlight',
 	callback = function()
-		-- 基本
+		-- ======== 基本 ========
 		hi(0, 'NormalNC', {bg = '#e8e8e8'})
-		hi(0, 'EndOfBuffer', {fg = C:getcolor('ql_lightgrey'), bg = 'NONE'})
+		hi(0, 'EndOfBuffer', {fg = C:getcolor('ql_lightgray'), bg = 'NONE'})
 		hi(0, 'NonText', {fg = '#e4e4fc'})
-		-- 浮动窗口
-		hi(0, 'NormalFloat', {fg = C:getcolor('ql_black'), bg = C:getcolor('ql_lightgrey')})
+		-- ======== 浮动窗口 ========
+		hi(0, 'NormalFloat', {fg = C:getcolor('ql_black'), bg = C:getcolor('ql_lightgray')})
 		hi(0, 'Pmenu', {link = 'NormalFloat'})
 		hi(0, 'PmenuSel', {fg = C:getcolor('ql_black'), bg = C:getcolor('ql_lightpurple')})
 		hi(0, 'PmenuMatch', {bold = true, fg = C:getcolor('ql_red')})
-		--hi(0, 'PmenuMatchSel', {bg = C:getcolor('ql_lightgrey')})
-		-- 各种状态栏
+		--hi(0, 'PmenuMatchSel', {bg = C:getcolor('ql_lightgray')})
+		-- ======== 各种状态栏 ========
 		-- TODO Diagnostic 能否结合 link
-		hi(0, 'LineNr', {fg = C:getcolor('ql_black'), bg = C:getcolor('ql_verylightgrey')})
-		hi(0, 'SignColumn', {bg = C:getcolor('ql_lightgrey')})
+		hi(0, 'LineNr', {fg = C:getcolor('ql_black'), bg = C:getcolor('ql_verylightgray')})
+		hi(0, 'SignColumn', {bg = C:getcolor('ql_lightgray')})
 		hi(0, 'TabLineSel', {bold = true, fg = C:getcolor('ql_black'), bg = C:getcolor('ql_lightpurple')})
-		hi(0, 'TabLineFill', {bg = C:getcolor('ql_lightgrey')})
-		-- 光标
+		hi(0, 'TabLineFill', {bg = C:getcolor('ql_lightgray')})
+		-- default reversed
+		hi(0, 'StatusLineTerm', {fg = C:getcolor('ql_white'), bg = C:getcolor('ql_black_50')})
+		hi(0, 'StatusLineTermNC', {fg = C:getcolor('ql_white'), bg = '#c2c2c2'})
+		-- ======== 光标 ========
 		-- TODO Visual 的 #a1a8b1 颜色
 		hi(0, 'CursorLineNr', {fg = C:getcolor('ql_white'), bg = C:getcolor('ql_green')})
 		hi(0, 'Visual', {fg = C:getcolor('ql_white'), bg = '#a1a8b1'})
 		--hi(0, 'VisualNOS', {link = 'CursorLine'})
-		-- 搜索
+		-- ======== 搜索 ========
 		hi(0, 'Search', {fg = C:getcolor('ql_black'), bg = C:getcolor('highlight_yellow')})
+		hi(0, 'CurSearch', {fg = C:getcolor('ql_black'), bg = C:getcolor('ql_brighter_orange')})
 		hi(0, 'Substitute', {link = 'Search'})
 		-- Diagnostic
-		hi(0, 'DiagnosticError', {bold = true, fg = '#cc0000', bg = C:getcolor('ql_lightgrey')})
-		hi(0, 'DiagnosticWarn', {bold = true, fg = '#ca7602', bg = C:getcolor('ql_lightgrey')})
-		hi(0, 'DiagnosticInfo', {bold = true, fg = '#448c27', bg = C:getcolor('ql_lightgrey')})
-		hi(0, 'DiagnosticHint', {bold = true, fg = '#a1a8b1', bg = C:getcolor('ql_lightgrey')})
-		hi(0, 'DiagnosticOk', {bold = true, fg = 'NvimDarkGreen', bg = C:getcolor('ql_lightgrey')})
-		hi(0, 'DiagnosticSignError', {bold = true, fg = '#cc0000', bg = C:getcolor('ql_lightgrey')})
-		hi(0, 'DiagnosticSignWarn', {bold = true, fg = '#ca7602', bg = C:getcolor('ql_lightgrey')})
-		hi(0, 'DiagnosticSignInfo', {bold = true, fg = '#448c27', bg = C:getcolor('ql_lightgrey')})
-		hi(0, 'DiagnosticSignHint', {bold = true, fg = '#a1a8b1', bg = C:getcolor('ql_lightgrey')})
-		hi(0, 'DiagnosticSignOk', {bold = true, fg = 'NvimDarkGreen', bg = C:getcolor('ql_lightgrey')})
-		-- 折叠
+		hi(0, 'DiagnosticError', {bold = true, fg = '#cc0000', bg = C:getcolor('ql_lightgray')})
+		hi(0, 'DiagnosticWarn', {bold = true, fg = '#ca7602', bg = C:getcolor('ql_lightgray')})
+		hi(0, 'DiagnosticInfo', {bold = true, fg = '#448c27', bg = C:getcolor('ql_lightgray')})
+		hi(0, 'DiagnosticHint', {bold = true, fg = '#a1a8b1', bg = C:getcolor('ql_lightgray')})
+		hi(0, 'DiagnosticOk', {bold = true, fg = 'NvimDarkGreen', bg = C:getcolor('ql_lightgray')})
+		hi(0, 'DiagnosticSignError', {bold = true, fg = '#cc0000', bg = C:getcolor('ql_lightgray')})
+		hi(0, 'DiagnosticSignWarn', {bold = true, fg = '#ca7602', bg = C:getcolor('ql_lightgray')})
+		hi(0, 'DiagnosticSignInfo', {bold = true, fg = '#448c27', bg = C:getcolor('ql_lightgray')})
+		hi(0, 'DiagnosticSignHint', {bold = true, fg = '#a1a8b1', bg = C:getcolor('ql_lightgray')})
+		hi(0, 'DiagnosticSignOk', {bold = true, fg = 'NvimDarkGreen', bg = C:getcolor('ql_lightgray')})
+		-- ======== 折叠 ========
 		hi(0, 'Folded', {bg = C:getcolor('folded_green')})
 		-- diff
 		-- hi(0, 'DiffAdd', {fg = C:getcolor('ql_white'), bg = C:getcolor('ql_green')})
@@ -57,11 +61,11 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 		hi(0, 'DiffDelete', {fg = C:getcolor('ql_black'), bg = '#ffc1c2'})
 		hi(0, 'DiffChange', {fg = C:getcolor('ql_black'), bg = '#c1ebff'})
 		hi(0, 'DiffText', {fg = C:getcolor('ql_black'), bg = '#ffa300'})
-		-- 编程语言
+		-- ======== 编程语言 ========
 		hi(0, 'Exception', {fg = C:getcolor('ql_brighter_red')})
 		hi(0, '@type.builtin', {fg = C:getcolor('ql_brighter_red')})
 		hi(0, '@parameter', {fg = C:getcolor('ql_orange')}) -- 被 @property.json link
-		-- 错误, 警告
+		-- ======== 错误, ======== 警告
 		hi(0, 'WarningMsg', {fg = C:getcolor('warning_yellow')})
 		-- LSP
 		-- Signature 对当前参数的高亮, 改为更显眼的红色
@@ -71,7 +75,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 		hi(0, 'LspSignatureActiveParameter', {bg = C:getcolor('ql_lightpurple')})
 		-- BUG 如果不加, 切换 colorscheme 时, 这个会被设成 NvimLightGrey2
 		hi(0, '@variable', {fg = 'NvimDarkGrey2'})
-		-- @markup
+		-- ======== @markup ========
 		-- heading: 参考 nvim-orgmode 插件
 		hi(0, '@markup.heading.1.markdown', {link = 'Title'})
 		hi(0, '@markup.heading.2.markdown', {link = 'Constant'})
@@ -86,12 +90,12 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 		hi(0, 'qfLineNr', {fg = C:getcolor('warning_yellow')})
 		-- scratch buffer
 		hi(0, 'ScratchNormal', {bg = C:getcolor('scratch_backgound_yellow')})
-		hi(0, 'ScratchEndOfBuffer', {fg = C:getcolor('ql_lightgrey'), bg = C:getcolor('scratch_backgound_yellow')})
-		-- [package] termdebug
+		hi(0, 'ScratchEndOfBuffer', {fg = C:getcolor('ql_lightgray'), bg = C:getcolor('scratch_backgound_yellow')})
+		-- ======== [package] termdebug ========
 		hi(0, 'debugBreakpoint', {bg = C:getcolor('pico8_8')})
-		-- [plugin] flash.nvim
+		-- ======== [plugin] flash.nvim ========
 		hi(0, 'FlashLabel', {fg = C:getcolor('pico8_7'), bg = C:getcolor('pico8_14')})
-		-- [dirty]
+		-- ======== [dirty] ========
 		-- clear TermCursor, because when entering builtin-terminal, the outside cursor color will be changed
 		hi(0, 'TermCursor', {})
 	end

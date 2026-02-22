@@ -5,10 +5,11 @@
 local tmpbin_dir = vim.fn.expand('~')..'/.tmp'
 
 --- TODO reuse terminal
---- @param flags? string compile flags
---- @param isdebug? bool use debug mode
---- @param force_term? bool forced terminal usage
-local function build_with_clangpp(flags, isdebug, force_term)
+---@param flags? string compile flags
+---@param ispp? bool use clang++ (true) or clang (false)
+---@param isdebug? bool use debug mode
+---@param force_term? bool forced terminal usage
+local function build_with_clang(flags, ispp, isdebug, force_term)
 	-- ======== 构造编译命令 ========
 
 	--local cur_dir = vim.fn.expand('%:p:h')
@@ -20,7 +21,7 @@ local function build_with_clangpp(flags, isdebug, force_term)
 	end
 
 	local compile_cmd = string.format(
-		'clang++ -Wall %s -o "%s/%s" "%s"',
+		'clang'..(ispp and '++' or '')..' -Wall %s -o "%s/%s" "%s"',
 		flags,
 		tmpbin_dir, out_name,
 		cur_file
@@ -73,16 +74,46 @@ vim.api.nvim_create_autocmd('FileType', {
 	callback = function ()
 		-- Bclangpp
 		vim.api.nvim_buf_create_user_command(0, 'Bclangpp', function (opts)
-			build_with_clangpp(opts.args, opts.bang, false)
+			build_with_clang(opts.args, true, opts.bang, false)
 		end, {
 			desc = "Build current source file with clang++",
 			bang = true,
 			nargs = '?'
 		})
 		vim.api.nvim_buf_create_user_command(0, 'TermBclangpp', function (opts)
-			build_with_clangpp(opts.args, opts.bang, true)
+			build_with_clang(opts.args, true, opts.bang, true)
 		end, {
 			desc = "Build current source file with clang++ (forced terminal usage)",
+			bang = true,
+			nargs = '?'
+		})
+		-- R
+		vim.api.nvim_buf_create_user_command(0, 'R', function (opts)
+			run(opts.args)
+		end, {
+			desc = "Run current source file's corresponding binary",
+			bang = false,
+			nargs = '?'
+		})
+	end
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = {'c'},
+	group = cxx_utils_group,
+	callback = function ()
+		-- Bclang
+		vim.api.nvim_buf_create_user_command(0, 'Bclang', function (opts)
+			build_with_clang(opts.args, false, opts.bang, false)
+		end, {
+			desc = "Build current source file with clang",
+			bang = true,
+			nargs = '?'
+		})
+		vim.api.nvim_buf_create_user_command(0, 'TermBclang', function (opts)
+			build_with_clang(opts.args, true, opts.bang, true)
+		end, {
+			desc = "Build current source file with clang (forced terminal usage)",
 			bang = true,
 			nargs = '?'
 		})
@@ -107,10 +138,16 @@ vim.api.nvim_create_autocmd('FileType', {
 		vim.keymap.set('n', '<LocalLeader>bb', ':Bclangpp<cr>', {buffer = true})
 		vim.keymap.set('n', '<LocalLeader>bd', ':Bclangpp!<cr>', {buffer = true})
 		vim.keymap.set('n', '<LocalLeader>r', ':R<cr>', {buffer = true})
-		-- TODO build and run: use one window to show, or build silently unless fail
-		--vim.keymap.set('n', '<leader>br', function (opts)
-		--	build_with_clangpp('', false)
-		--	run('')
-		--end, {buffer = true})
+	end
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = {'c'},
+	group = cxx_utils_group,
+	callback = function ()
+		-- TODO consider use B rather than b
+		vim.keymap.set('n', '<LocalLeader>bb', ':Bclang<cr>', {buffer = true})
+		vim.keymap.set('n', '<LocalLeader>bd', ':Bclang!<cr>', {buffer = true})
+		vim.keymap.set('n', '<LocalLeader>r', ':R<cr>', {buffer = true})
 	end
 })

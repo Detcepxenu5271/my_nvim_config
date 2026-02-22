@@ -2,39 +2,44 @@ local opt = vim.opt
 
 -- ======== 外 观 (ui) ========
 
-opt.complete:append('k')
-opt.complete:append('s')
-opt.complete:remove('u')
--- when 0.12, fuzzy may affect the collection of candidates
--- longest may conflict with fuzzy
-opt.completeopt = {'menuone', 'popup', 'fuzzy'}
--- opt.completeopt:append('longest')
--- opt.completeopt:remove('menu')
--- opt.completeopt:append('menuone')
 opt.cursorline = true
 opt.equalalways = false
-opt.ignorecase = true
-opt.jumpoptions:append('stack')
 opt.lazyredraw = true;
 opt.list = true
 -- simulate indent line
 opt.listchars = {tab = '│ ', trail = 'X'}
 --opt.listchars = {tab = '>-', trail = 'X'}
+opt.showbreak = '>'
+
+-- ======== 编 辑 (edit) ========
+
+opt.complete:append('k')
+opt.complete:append('s')
+opt.complete:remove('u')
+-- when 0.12, fuzzy may affect the collection of candidates
+-- longest may conflict with fuzzy
+opt.completeopt = {'fuzzy', 'menuone', 'noinsert', 'popup'}
+-- opt.completeopt:append('longest')
+-- opt.completeopt:remove('menu')
+-- opt.completeopt:append('menuone')
+opt.ignorecase = true
+opt.jumpoptions:append('stack')
 opt.nrformats:append('alpha')
-opt.number = true
-opt.relativenumber = true
 opt.shiftround = true
 -- shiftwidth=0: use tabstop
 opt.shiftwidth = 0
 opt.smartcase = true
 opt.smartindent = true
+opt.tabstop = 4
+opt.virtualedit:append('block')
+opt.wrapscan = false
+
+-- ======== 窗 口 (window) ========
+
 opt.splitkeep = 'screen'
 opt.splitbelow = true
 opt.splitright = true
-opt.tabstop = 4
-opt.virtualedit:append('block')
 opt.winwidth = 1
-opt.wrapscan = false
 
 -- ======== 文 件 (file) ========
 

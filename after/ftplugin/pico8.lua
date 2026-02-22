@@ -1,2 +1,2 @@
-vim.wo.signcolumn = 'number'
-vim.wo.wrap = false
+vim.opt_local.signcolumn = 'number'
+vim.opt_local.wrap = false

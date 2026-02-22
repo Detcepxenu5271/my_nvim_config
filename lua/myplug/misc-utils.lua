@@ -1,6 +1,7 @@
 -- ======== Misc Keymaps ========
 
-vim.keymap.set('n', '<Leader><C-a>', ":<C-u>keepp '<,'>s/\\%V\\<\\d\\+\\>/\\=submatch(0)+1/g<CR>")
+-- <C-a> on all (non-negative) numbers in visual selected area
+-- vim.keymap.set('n', '<Leader><C-a>', ":<C-u>keepp '<,'>s/\\%V\\<\\d\\+\\>/\\=submatch(0)+1/g<CR>")
 vim.keymap.set('v', '<Leader><C-a>', ":<C-u>keepp '<,'>s/\\%V\\<\\d\\+\\>/\\=submatch(0)+1/g<CR>")
 
 -- ======== Misc Commands ========
@@ -17,4 +18,6 @@ vim.api.nvim_create_user_command('HexDump', 'vnew | 0r # | setl noswapfile bufty
 --vim.api.nvim_create_user_command('DiffSaved', 'vertical new | set buftype=nofile | 0read ++edit # | diffthis | wincmd p | diffthis', {})
 
 -- reverse the visual selected lines
-vim.api.nvim_create_user_command('ReverseLine', [[exe "keepp '<,'>g/^/m "..(line("'<")-1)]], {})
+vim.api.nvim_create_user_command('LineReverse', [[exe "keepp '<,'>g/^/m "..(line("'<")-1)]], {})
+-- count the number of visual selected lines
+vim.api.nvim_create_user_command('LineCount', [[echo line("'>")-line("'<")+1]], {})

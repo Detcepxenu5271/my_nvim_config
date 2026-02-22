@@ -11,6 +11,7 @@ map('n', 'M', function()
 end, {desc = 'Meta Command'})
 
 -- ======== Leader ========
+-- 优先使用 Leader 类映射, 避免过多改变默认按键映射
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
@@ -18,6 +19,8 @@ vim.g.maplocalleader = "\\"
 map('n', '<leader>', '<nop>')
 
 map('n', '<leader>/', ":let @/='\\<'..input('Search word: ')..'\\>'<CR>")
+-- search inside Visual area
+map('v', '<leader>/', "<Esc>`</\\%V")
 map('n', '<leader>d', '<nop>')
 map('n', '<leader>dd', [[:exe "lc" substitute(expand('%:p:h'), '^\w\+://', '', '') | pwd<cr>]])
 map('n', '<leader>dt', [[:exe "tc" substitute(expand('%:p:h'), '^\w\+://', '', '') | pwd<cr>]])
@@ -44,12 +47,14 @@ map('n', '<leader>oc', function ()
 end)
 map('n', '<leader>oh', ':noh<cr>', {silent = true})
 map('n', '<leader>on', function()
-	if vim.o.number then
-		vim.o.number = false
-		vim.o.relativenumber = false
+	if vim.wo.number then
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
+		vim.opt_local.showbreak = vim.go.showbreak
 	else
-		vim.o.number = true
-		vim.o.relativenumber = true
+		vim.opt_local.number = true
+		vim.opt_local.relativenumber = true
+		vim.opt_local.showbreak = "NONE"
 	end
 end)
 map('n', '<leader>ot', ':let &showtabline = 3-&showtabline | setl showtabline?<cr>')
@@ -67,6 +72,10 @@ map("v", "<Leader>=v", [[s<C-r>=<C-r>"<Cr><Esc>]], {desc = "Evaluate Vim Express
 map("v", "<Leader>=l", [[s<C-r>=luaeval('<C-r>"')<Cr><Esc>]], {desc = "Evaluate Lua Expression"})
 
 -- ======== 移 动 (motion) ========
+-- 类 Emacs 的 insert & commandline 模式
+-- 用 C-n 代替 C-i
+-- H/L 设为 0/$, 因为行首/尾移动频繁
+-- hjkl 默认在显示的行 (display line) 上移动, 而不是实际的行 (交换 j 和 gj 等的行为)
 
 map({'i', 'c'}, '<c-a>', '<home>')
 -- use <expr> because function return the key rather than execute it
@@ -87,18 +96,26 @@ map({'n', 'v', 'o'}, 'H', 'g0')
 map({'n', 'v', 'o'}, 'L', 'g$')
 
 -- ======== 编 辑 (edit) ========
+-- 类 Emacs 的 insert & commandline 模式
+-- omni 和 tag 补全不需要 C-x 前缀
+-- visual 模式下 gt 设为 Title Case
 
 map({'i', 'c'}, '<c-l>', '<del>')
 
 -- 补全
-map('i', '<C-o>', '<C-x><C-o>')
+-- map('i', '<C-o>', '<C-x><C-o>')
 map('i', '<C-]>', '<C-x><C-]>')
+-- change to title case
+map('v', 'gt', [[:keepp s/\v%V<lt>(.)(\w*)/\u\1\L\2/g<CR>]], { silent = true, })
 
 -- ======== 查看 (view) ========
+-- Tab 用来切换折叠
 
 map('n', '<Tab>', 'za')
 
 -- ======== 窗口 (window) ========
+-- C-h/j/k/l 移动 focus
+-- =-+_ (加减号及其 Shift) 调整窗口大小
 
 map('n', '<c-h>', '<c-w>h')
 -- 终端中, <C-H> 和 <BS> 可能是一个键码
@@ -112,7 +129,9 @@ map('n', '+', '<c-w>>')
 map('n', '_', '<c-w><')
 
 -- ======== esc 绑定 ========
+-- jk
 
 map('i', 'jk', '<esc>')
-map('t', 'jk', '<c-\\><c-n>')
+-- Maybe only use <C-\><C-n> is better in terminal mode
+-- map('t', 'jk', '<c-\\><c-n>')
 

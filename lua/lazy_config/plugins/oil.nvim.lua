@@ -16,6 +16,10 @@ return {
 	---@type oil.SetupOpts
 	opts = {
 		default_file_explorer = true,
+		win_options = {
+			number = false,
+			relativenumber = false,
+		},
 		watch_for_changes = true,
 		-- don't use winbar, show current directory by statusline
 		--win_options = {
