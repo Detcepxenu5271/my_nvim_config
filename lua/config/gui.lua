@@ -3,6 +3,14 @@ if vim.g.neovide then
 	vim.o.guifont = 'UbuntuMono Nerd Font,LXGW WenKai Mono:h15'
 	vim.g.neovide_opacity = 0.9
 	vim.g.neovide_normal_opacity = 0.9
+	vim.api.nvim_create_user_command('NeovideSetOpacity', function(opts)
+		local opacity = tonumber(opts.args)
+		vim.g.neovide_opacity = opacity
+		vim.g.neovide_normal_opacity = opacity
+	end, {
+		desc = "Set both opacity and normal opacity of Neovide",
+		nargs = 1, -- weird, not string (-nargs=? must use '?')
+	})
 	-- Animations
 	vim.g.neovide_position_animation_length = 0.15 -- 0.15
 	vim.g.neovide_cursor_animation_length = 0 -- 0.150

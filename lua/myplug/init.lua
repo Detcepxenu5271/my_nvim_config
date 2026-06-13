@@ -15,7 +15,8 @@ require'myplug.misc-utils'
 
 -- language utils
 vim.cmd('source '..myplug_path..get_slash()..'markdown-utils.vim')
-require'myplug.cxx-utils'
+-- require'myplug.cxx-utils'
+require'myplug.task'.setup()
 
 -- UI
 vim.cmd('source '..myplug_path..get_slash()..'statusline.vim')

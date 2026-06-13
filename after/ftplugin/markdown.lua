@@ -1,5 +1,4 @@
 vim.opt_local.conceallevel = 2
-vim.opt_local.foldlevel = 1
 
 vim.keymap.set('n', '<LocalLeader>b', 'viWv`>a**<Esc>`<i**<Esc>', {buffer = true})
 vim.keymap.set('n', '<LocalLeader>i', 'viWv`>a*<Esc>`<i*<Esc>', {buffer = true})
@@ -14,3 +13,8 @@ vim.keymap.set('v', '<LocalLeader>m', 'v`>a$<Esc>`<i$<Esc>', {buffer = true})
 vim.keymap.set('i', 'jlc', '``<Left>', {buffer = true})
 vim.keymap.set('i', 'jlm', '$$<Left>', {buffer = true})
 
+vim.treesitter.start()
+vim.opt_local.foldmethod = 'expr'
+vim.opt_local.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt_local.foldlevel = 1
+vim.opt_local.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"

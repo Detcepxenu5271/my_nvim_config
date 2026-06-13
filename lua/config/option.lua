@@ -53,6 +53,7 @@ opt.fileencodings = 'ucs-bom,utf-8,cp936,default,latin1'
 
 opt.wildmode = {'longest', 'full'}
 opt.wildoptions:append('fuzzy')
+opt.showmode = false
 
 -- ======== 其 他 (else) ========
 
@@ -67,6 +68,9 @@ end
 -- netrw tree
 vim.g.netrw_banner = 0
 vim.g.netrw_preview = 1
+vim.g.netrw_alto = 0
+vim.g.netrw_altv = 1
+vim.g.netrw_winsize = 80
 
 -- markdown
 vim.g.markdown_folding = 1

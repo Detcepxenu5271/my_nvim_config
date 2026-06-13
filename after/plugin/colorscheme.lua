@@ -92,7 +92,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 		hi(0, 'ScratchNormal', {bg = C:getcolor('scratch_backgound_yellow')})
 		hi(0, 'ScratchEndOfBuffer', {fg = C:getcolor('ql_lightgray'), bg = C:getcolor('scratch_backgound_yellow')})
 		-- ======== [package] termdebug ========
-		hi(0, 'debugBreakpoint', {bg = C:getcolor('pico8_8')})
+		hi(0, 'debugBreakpoint', {fg = C:getcolor('ql_verylightgray'), bg = C:getcolor('ql_brighter_red')})
 		-- ======== [plugin] flash.nvim ========
 		hi(0, 'FlashLabel', {fg = C:getcolor('pico8_7'), bg = C:getcolor('pico8_14')})
 		-- ======== [dirty] ========

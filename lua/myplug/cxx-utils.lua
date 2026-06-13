@@ -1,10 +1,10 @@
--- TODO c (only cpp now)
+-- DEPRECATED (now use myplug/task)
 
 -- all binary (executable) files are generated to tmp dir, and used from it
 -- only support linux by default (for other platforms or custom path, change this variable)
 local tmpbin_dir = vim.fn.expand('~')..'/.tmp'
 
---- TODO reuse terminal
+---TODO reuse terminal
 ---@param flags? string compile flags
 ---@param ispp? bool use clang++ (true) or clang (false)
 ---@param isdebug? bool use debug mode

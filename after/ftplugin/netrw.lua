@@ -1,1 +1,38 @@
---vim.keymap.set('n', '<c-l>', '<nop>')
+vim.keymap.set('n', '<C-l>', '<C-w>l', {buffer = true})
+
+-- 在 netrw 缓冲区中重写 P 键
+-- ?不好用 ?不生效
+-- vim.keymap.set('n', 'P', function()
+-- 	-- 1. 记录真正要跳过去的“上一个窗口”的 ID
+-- 	local target_win = vim.fn.win_getid(vim.fn.winnr('#'))
+-- 	if target_win == 0 or target_win == vim.api.nvim_get_current_win() then
+-- 		print("找不到上一个窗口！")
+-- 		return
+-- 	end
+--
+-- 	local netrw_win = vim.api.nvim_get_current_win()
+--
+-- 	-- 2. 借用 netrw 原本极其稳定的 'v' 键（垂直分割打开文件）
+-- 	-- 这会让 netrw 自己去处理复杂的树状缩进，得到正确的路径
+-- 	-- 注意：这里使用 'normal v' 而不是 'normal! v'，以触发 netrw 的原生映射
+-- 	vim.cmd('normal v')
+--
+-- 	-- 此时光标已经跳到了新打开的、路径完全正确的文件窗口中
+-- 	local new_win = vim.api.nvim_get_current_win()
+-- 	if new_win == netrw_win then
+-- 		return -- 如果因为光标在不支持的文件上导致没有打开新窗口，则直接退出
+-- 	end
+--
+-- 	-- 3. 获取这个文件的绝对路径
+-- 	local filepath = vim.fn.expand('%:p')
+--
+-- 	-- 4. 关掉这个为了拿路径而临时打开的窗口，假装什么都没发生
+-- 	vim.cmd('quit')
+--
+-- 	-- 5. 瞬间跳到真正的目标窗口
+-- 	vim.api.nvim_set_current_win(target_win)
+--
+-- 	-- 6. 打开真正的文件
+-- 	vim.cmd('edit ' .. vim.fn.fnameescape(filepath))
+--
+-- end, { buffer = true, desc = "Fix Netrw Tree P bug" })

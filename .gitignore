@@ -2,7 +2,7 @@
 
 # 插件管理器目录（如 lazy.nvim、packer 等）
 # lazy.nvim 的锁文件
-/lazy-lock.json
+# /lazy-lock.json
 #/packer_compiled.lua  # packer.nvim 的编译文件
 #/plugin/packer_compiled.lua
 

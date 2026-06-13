@@ -15,7 +15,7 @@ return {
 	---@module 'oil'
 	---@type oil.SetupOpts
 	opts = {
-		default_file_explorer = true,
+		default_file_explorer = false,
 		win_options = {
 			number = false,
 			relativenumber = false,

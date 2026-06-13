@@ -1,3 +1,5 @@
+-- TODO 考虑将无依赖的自定义命令放到 config 目录下
+
 -- ======== Misc Keymaps ========
 
 -- <C-a> on all (non-negative) numbers in visual selected area
@@ -21,3 +23,8 @@ vim.api.nvim_create_user_command('HexDump', 'vnew | 0r # | setl noswapfile bufty
 vim.api.nvim_create_user_command('LineReverse', [[exe "keepp '<,'>g/^/m "..(line("'<")-1)]], {})
 -- count the number of visual selected lines
 vim.api.nvim_create_user_command('LineCount', [[echo line("'>")-line("'<")+1]], {})
+-- count the Chinese characters of visual selected area (need <C-u> to delete the range in cmdline)
+vim.api.nvim_create_user_command('ChineseCount', "'<,'>s/\\%V[\\u4e00-\\u9fcc]//gn" , {})
+
+-- 删除行尾空格
+-- vim.api.nvim_create_user_command('TrimTrailingWhitespaces', "<range>s/", {range = true})

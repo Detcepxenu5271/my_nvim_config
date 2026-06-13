@@ -11,12 +11,12 @@ vim.opt_local.expandtab = true
 vim.opt_local.tabstop = 4
 
 vim.keymap.set('i', 'jlc', '~~<Left>', {buffer = true})
-vim.keymap.set('i', 'jlm', '$$<Left>', {buffer = true})
+vim.keymap.set('i', 'jlm', '\\(\\)<Left><Left>', {buffer = true})
 
 vim.keymap.set('v', '<LocalLeader>b', 'v`>a*<Esc>`<i*<Esc>', {buffer = true})
 vim.keymap.set('v', '<LocalLeader>i', 'v`>a/<Esc>`<i/<Esc>', {buffer = true})
 vim.keymap.set('v', '<LocalLeader>c', 'v`>a~<Esc>`<i~<Esc>', {buffer = true})
-vim.keymap.set('v', '<LocalLeader>m', 'v`>a$<Esc>`<i$<Esc>', {buffer = true})
+vim.keymap.set('v', '<LocalLeader>m', 'v`>a\\(<Esc>`<i\\)<Esc>', {buffer = true})
 
 vim.keymap.set('ca', 'poo', "^\\*\\+", {desc = 'Pattern of Org Node', buffer = true})
 vim.keymap.set('ca', 'pott', ":\\zs\\w\\+\\ze:<C-r>=Eatchar('\\s')<CR>", {desc = 'Pattern of Org Tag', buffer = true})
@@ -133,3 +133,5 @@ vim.keymap.set('n', '<LocalLeader>B', find_backlinks, {buffer = true})
 -- abbreviation
 
 --vim.keymap.set('ia', 'h3', '***', {buffer = true})
+
+vim.treesitter.start()

@@ -29,6 +29,8 @@ function! MyStatusLine()
 
 		" -------- 右对齐部分 --------
 		let s:statusline ..= '%= '
+		" 上一个 cmd
+		"let s:statusline ..= '%S'
 		" 当前字符的十六进制
 		let s:statusline ..= '|%B'
 		" 列位置

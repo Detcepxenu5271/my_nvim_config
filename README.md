@@ -10,3 +10,4 @@ LSP uses Nvim built-in with nvim-lspconfig plugin. For Nvim 0.11 or older, nvim-
 
 {!old!} LSP is disabled by default. To enable a specific LSP client, use my command `:LspEnable` or directly use `:lua vim.lsp.enable('...')` (they are the same except the former support completion of user specified config name).
 
+{dirty} some features requires ~/.tmp directory

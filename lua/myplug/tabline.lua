@@ -119,12 +119,16 @@ function _G.my_tabline()
 			table.insert(s, tab_names[i])
 		end
 		-- number of buffers
-		if #buflist > 1 then
+		-- don't showed for current tab (there may be unseen buffers such as "[Msg]")
+		if i ~= current_tab and #buflist > 1 then
 			table.insert(s, '('..#buflist..')')
 		end
 
 		-- end seperator
 		table.insert(s, ' ')
+		if i < vim.fn.tabpagenr('$') then
+			table.insert(s, '│')
+		end
 	end
 	-- after last tab fill with TabLineFill
 	table.insert(s, '%#TabLineFill#%T')

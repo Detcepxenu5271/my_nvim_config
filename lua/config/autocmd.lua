@@ -15,8 +15,8 @@ vim.api.nvim_create_autocmd('InsertEnter', {
 	group = 'my_autocmd',
 	pattern = '*',
 	callback = function()
-		if vim.o.number then
-			vim.o.relativenumber = false
+		if vim.wo.number then
+			vim.opt_local.relativenumber = false
 		end
 	end,
 	desc = 'use norelativenumber in insert mode'
@@ -26,8 +26,8 @@ vim.api.nvim_create_autocmd('InsertLeave', {
 	group = 'my_autocmd',
 	pattern = '*',
 	callback = function()
-		if vim.o.number then
-			vim.o.relativenumber = true
+		if vim.wo.number then
+			vim.opt_local.relativenumber = true
 		end
 	end,
 	desc = 'use relativenumber in normal mode'

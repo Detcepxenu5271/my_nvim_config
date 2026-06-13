@@ -6,7 +6,8 @@ map('n', 'M', function()
 	vim.cmd([[
 		exe 'tabe' stdpath('data')..'/meta.txt'
 		exe 'tc' stdpath('data')
-		setl foldmethod=indent
+		" (nvim) use ftplugin for text to set foldmethod
+		"setl foldmethod=indent
 	]])
 end, {desc = 'Meta Command'})
 
@@ -16,11 +17,10 @@ end, {desc = 'Meta Command'})
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- [Normal Mode]
 map('n', '<leader>', '<nop>')
 
 map('n', '<leader>/', ":let @/='\\<'..input('Search word: ')..'\\>'<CR>")
--- search inside Visual area
-map('v', '<leader>/', "<Esc>`</\\%V")
 map('n', '<leader>d', '<nop>')
 map('n', '<leader>dd', [[:exe "lc" substitute(expand('%:p:h'), '^\w\+://', '', '') | pwd<cr>]])
 map('n', '<leader>dt', [[:exe "tc" substitute(expand('%:p:h'), '^\w\+://', '', '') | pwd<cr>]])
@@ -61,6 +61,17 @@ map('n', '<leader>ot', ':let &showtabline = 3-&showtabline | setl showtabline?<c
 map('n', '<leader>ow', ':setl wrap! wrap?<cr>')
 map('n', '<leader>w', '<c-w>')
 
+-- [Visual Mode]
+-- search inside Visual area
+map('v', '<leader>/', "<Esc>`</\\%V")
+map("v", "<Leader>=v", [[s<C-r>=<C-r>"<Cr><Esc>]], {desc = "Evaluate Vim Expression"})
+map("v", "<Leader>=l", [[s<C-r>=luaeval('<C-r>"')<Cr><Esc>]], {desc = "Evaluate Lua Expression"})
+
+-- [Leader Leader] (for temporary use)
+map('n', '<leader><leader>', '<nop>')
+-- fix bug of ui2 by split current window and close the previous one
+map('n', '<leader><leader>u', '<C-w>s<C-w>p<C-w>c')
+
 -- ======== Insert 模式下的 "leader" ========
 -- 用 jl 作为 leader
 
@@ -68,8 +79,6 @@ map('n', '<leader>w', '<c-w>')
 -- 现: 设计上 util 要在脚本中主动调用, 而表达式求值常用, 直接附带
 map('i', 'jl==', '<esc>vBdi<c-r>=<c-r>"<cr>')
 map('i', 'jl=e', '<space><esc>yBEls=<c-r>=<c-r>0<cr>')
-map("v", "<Leader>=v", [[s<C-r>=<C-r>"<Cr><Esc>]], {desc = "Evaluate Vim Expression"})
-map("v", "<Leader>=l", [[s<C-r>=luaeval('<C-r>"')<Cr><Esc>]], {desc = "Evaluate Lua Expression"})
 
 -- ======== 移 动 (motion) ========
 -- 类 Emacs 的 insert & commandline 模式
@@ -86,10 +95,11 @@ map({'c'}, '<c-b>', function() return vim.fn.pumvisible() == 0 and '<Left>' or '
 map({'c'}, '<c-f>', function() return vim.fn.pumvisible() == 0 and '<Right>' or '<Down>' end, { expr = true, })
 -- pair of <C-o> (older) and <C-n> (newer), since <C-i> and <Tab> may be the same, and I map <Tab> to za
 map('n', '<C-n>', '<C-i>')
+-- swap j/k and gj/gk when no count given (with count, behaviour remains the default to better use relativenumber)
 map({'n', 'v', 'o'}, 'j', function() return vim.v.count == 0 and 'gj' or 'j' end, { expr = true, })
 map({'n', 'v', 'o'}, 'k', function() return vim.v.count == 0 and 'gk' or 'k' end, { expr = true, })
-map({'n', 'v', 'o'}, 'gj', 'j')
-map({'n', 'v', 'o'}, 'gk', 'k')
+map({'n', 'v', 'o'}, 'gj', function() return vim.v.count == 0 and 'j' or 'gj' end, { expr = true, })
+map({'n', 'v', 'o'}, 'gk', function() return vim.v.count == 0 and 'k' or 'gk' end, { expr = true, })
 map({'n', 'v', 'o'}, 'gH', '0')
 map({'n', 'v', 'o'}, 'gL', '$')
 map({'n', 'v', 'o'}, 'H', 'g0')
@@ -127,6 +137,12 @@ map('n', '=', '<c-w>+')
 map('n', '-', '<c-w>-')
 map('n', '+', '<c-w>>')
 map('n', '_', '<c-w><')
+
+-- ======== 补全 (completion) ========
+
+-- Tab/Shift-Tab for (auto)completion item choose
+map('i', '<Tab>', function() return vim.fn.pumvisible() == 0 and '<Tab>' or '<C-n>' end, { expr = true, })
+map('i', '<S-Tab>', function() return vim.fn.pumvisible() == 0 and '<S-Tab>' or '<C-p>' end, { expr = true, })
 
 -- ======== esc 绑定 ========
 -- jk
