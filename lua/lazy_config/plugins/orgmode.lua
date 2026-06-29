@@ -33,7 +33,7 @@ return {
 				d = {
 					description = "Default",
 					template = "* %^{PROMPT}",
-					target = vim.env.org_path.."/_refile.org"
+					target = vim.env.org_path.."/refile.org"
 				},
 				r = {
 					-- https://nvim-orgmode.github.io/tutorial#captures
@@ -42,7 +42,7 @@ return {
 					target = vim.env.org_path.."/repos.org",
 				}
 			},
-			org_default_notes_file = vim.env.org_path..'/_refile.org',
+			org_default_notes_file = vim.env.org_path..'/refile.org',
 			org_hide_emphasis_markers = true,
 			-- 'native' or 'entities':
 			-- native: see org as latex
@@ -91,7 +91,7 @@ return {
 		-- 小写 f: 搜全部标题
 		vim.keymap.set('n', '<Leader>Of', [[:tab sp<CR>:silent grep -t org '^\*+ ' ]]..vim.env.org_path..[[<CR>:tc %:p:h<CR>:copen<CR>]])
 		-- open refile.org
-		vim.keymap.set('n', '<Leader>Or', ':sp $org_path/_refile.org<CR>')
+		vim.keymap.set('n', '<Leader>Or', ':sp $org_path/refile.org<CR>')
 		-- [Experimental] LSP
 		vim.lsp.enable('org')
 
