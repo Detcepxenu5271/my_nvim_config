@@ -26,7 +26,8 @@ M.colornames = {
 	highlight_yellow = '#f0c674',
 	warning_yellow = '#ca7602',
 	--warning_yellow = '#ff922b',
-	folded_green = '#c4d6b4',
+	-- folded_green = '#c4d6b4',
+	folded_green = '#dbe6d1',
 	scratch_backgound_yellow = '#f7f3e6',
 	-- pico-8 palette
 	pico8_0 = '#000000', -- black

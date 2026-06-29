@@ -10,6 +10,8 @@ opt.list = true
 opt.listchars = {tab = '│ ', trail = 'X'}
 --opt.listchars = {tab = '>-', trail = 'X'}
 opt.showbreak = '>'
+opt.foldtext = ''
+--opt.fillchars = {fold = ' '}
 
 -- ======== 编 辑 (edit) ========
 
@@ -48,6 +50,7 @@ opt.backupdir:remove('.')
 opt.swapfile = true
 opt.undofile = true
 opt.fileencodings = 'ucs-bom,utf-8,cp936,default,latin1'
+opt.fileformats = 'unix,dos'
 
 -- ======== 命 令 行 (cmdline) ========
 

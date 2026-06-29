@@ -13,7 +13,7 @@
   "nvim-surround": { "branch": "main", "commit": "1098d7b3c34adcfa7feb3289ee434529abd4afd1" },
   "nvim-treesitter": { "branch": "main", "commit": "7caec274fd19c12b55902a5b795100d21531391f" },
   "oil.nvim": { "branch": "master", "commit": "0fcc83805ad11cf714a949c98c605ed717e0b83e" },
-  "orgmode": { "branch": "master", "commit": "2fc30d36fd1c3e6086a7424858e19a52a29ae937" },
+  "orgmode": { "branch": "master", "commit": "c8e3d6c42f22c5fb52e30f50fa7f5f962c577097" },
   "outline-treesitter-provider.nvim": { "branch": "main", "commit": "08d8f520fdf5a4eb795f251fe0a09488c5d8335f" },
   "outline.nvim": { "branch": "main", "commit": "c293eb56db880a0539bf9d85b4a27816960b863e" },
   "pico-8.vim": { "branch": "master", "commit": "34f8442d29ccf7f42fc500a78348eb38cec1f2ce" }

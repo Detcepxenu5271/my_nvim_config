@@ -21,7 +21,8 @@ require'myplug.task'.setup()
 -- UI
 vim.cmd('source '..myplug_path..get_slash()..'statusline.vim')
 require'myplug.tabline'
-vim.cmd('source '..myplug_path..get_slash()..'foldtext.vim')
+-- "set foldtext=" to see transparent highlight, but no number of folded lines
+--vim.cmd('source '..myplug_path..get_slash()..'foldtext.vim')
 
 -- others
 require'myplug.workspace-vim_compatible'
