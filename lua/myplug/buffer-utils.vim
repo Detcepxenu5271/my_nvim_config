@@ -7,10 +7,12 @@ endfunction
 
 function! BufMakeScratch(bn)
 	" 注: 如果是设置, 默认会修改 local, 不修改 global
+	" 这三个是 scratch 类 buffer 的条件
 	call setbufvar(a:bn, '&buftype', 'nofile')
 	call setbufvar(a:bn, '&bufhidden', 'hide')
-	call setbufvar(a:bn, '&buflisted', 0)
 	call setbufvar(a:bn, '&swapfile', 0)
+	" 这是自己设的, 不让 scratch 被 list (目前仅有 _scratch_ 使用本函数)
+	call setbufvar(a:bn, '&buflisted', 0)
 	" ?考虑使用 paste 模式解决复制的问题
 	"call setbufvar(a:bn, '&autoindent', 0)
 	"call setbufvar(a:bn, '&smartindent', 0)

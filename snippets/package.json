@@ -3,20 +3,24 @@
 	"contributes": {
 		"snippets": [
 			{
-					"language": "lua",
-					"path": "./lua.json"
+				"language": "lua",
+				"path": "./lua.json"
 			},
 			{
-					"language": "cpp",
-					"path": "./cpp.json"
+				"language": "cpp",
+				"path": "./cpp.json"
 			},
 			{
-					"language": "org",
-					"path": "./org.json"
+				"language": "org",
+				"path": "./org.json"
 			},
 			{
-					"language": "all",
-					"path": "./all.json"
+				"language": "all",
+				"path": "./all.json"
+			},
+			{
+				"language": "tex",
+				"path": "./tex.json"
 			}
 		]
 	}

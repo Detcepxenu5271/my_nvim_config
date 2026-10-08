@@ -1,0 +1,22 @@
+{
+	"My Template": {
+		"prefix": "template-minimal",
+		"body": [
+			"\\documentclass{article}",
+			"",
+			"\\usepackage{CJKutf8}",
+			"",
+			"\\title{Title}",
+			"\\author{Author}",
+			"",
+			"\\begin{document}",
+			"\t\\maketitle",
+			"",
+			"\t\\begin{CJK*}{UTF8}{gbsn}",
+			"\t${0}",
+			"\t\\end{CJK*}",
+			"",
+			"\\end{document}"
+		]
+	}
+}

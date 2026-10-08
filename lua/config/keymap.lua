@@ -57,6 +57,7 @@ map('n', '<leader>on', function()
 		vim.opt_local.showbreak = "NONE"
 	end
 end)
+map('n', '<leader>os', ':setl spell!<CR>')
 map('n', '<leader>ot', ':let &showtabline = 3-&showtabline | setl showtabline?<cr>')
 map('n', '<leader>ow', ':setl wrap! wrap?<cr>')
 map('n', '<leader>w', '<c-w>')
@@ -71,6 +72,10 @@ map("v", "<Leader>=l", [[s<C-r>=luaeval('<C-r>"')<Cr><Esc>]], {desc = "Evaluate 
 map('n', '<leader><leader>', '<nop>')
 -- fix bug of ui2 by split current window and close the previous one
 map('n', '<leader><leader>u', '<C-w>s<C-w>p<C-w>c')
+map('n', '<leader><leader>o', function()
+	vim.ui.open(vim.fn.expand('%'))
+	vim.cmd('q!')
+end, {desc = "Open current file by :Open and run :q!"})
 
 -- ======== Insert 模式下的 "leader" ========
 -- 用 jl 作为 leader
@@ -116,7 +121,7 @@ map({'i', 'c'}, '<c-l>', '<del>')
 -- map('i', '<C-o>', '<C-x><C-o>')
 map('i', '<C-]>', '<C-x><C-]>')
 -- change to title case
-map('v', 'gt', [[:keepp s/\v%V<lt>(.)(\w*)/\u\1\L\2/g<CR>]], { silent = true, })
+map('v', 'gt', [[:keepp s/\v%V<lt>(.)(\w*)/\u\1\L\2/g<CR>`<]], { silent = true, })
 
 -- ======== 查看 (view) ========
 -- Tab 用来切换折叠

@@ -12,6 +12,7 @@ opt.listchars = {tab = '│ ', trail = 'X'}
 opt.showbreak = '>'
 opt.foldtext = ''
 --opt.fillchars = {fold = ' '}
+opt.spelllang:append('cjk')
 
 -- ======== 编 辑 (edit) ========
 
@@ -35,6 +36,7 @@ opt.smartindent = true
 opt.tabstop = 4
 opt.virtualedit:append('block')
 opt.wrapscan = false
+opt.selectmode:append('mouse')
 
 -- ======== 窗 口 (window) ========
 
@@ -76,7 +78,7 @@ vim.g.netrw_altv = 1
 vim.g.netrw_winsize = 80
 
 -- markdown
-vim.g.markdown_folding = 1
+--vim.g.markdown_folding = 1
 vim.g.markdown_syntax_conceal = 1
 
 vim.cmd('packadd cfilter')

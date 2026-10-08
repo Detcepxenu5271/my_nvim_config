@@ -12,7 +12,8 @@ vim.keymap.set('v', '<Leader><C-a>', ":<C-u>keepp '<,'>s/\\%V\\<\\d\\+\\>/\\=sub
 vim.api.nvim_create_user_command('SessionQuick', 'mksession! ~/.tmp/Session.vim', {})
 
 -- view hex dump of current buffer in vertical split window
-vim.api.nvim_create_user_command('HexDump', 'vnew | 0r # | setl noswapfile buftype=nofile bufhidden=wipe ft=xxd nonu nornu nowrap | silent %!xxd', {})
+-- vim.api.nvim_create_user_command('HexDump', 'vnew +set\\ bin\\ nofixeol | r # | 0d | setl noswapfile buftype=nofile bufhidden=wipe ft=xxd nonu nornu nowrap | silent %!xxd', {})
+vim.api.nvim_create_user_command("HexDump", "vnew | setl noswapfile buftype=nofile bufhidden=wipe ft=xxd nonu nornu nowrap | silent exe 'r !xxd' shellescape(expand('#:p')) | 1d", {})
 
 -- diff current buffer with saved file
 -- TODO 自动切换 filetype
@@ -28,3 +29,11 @@ vim.api.nvim_create_user_command('ChineseCount', "'<,'>s/\\%V[\\u4e00-\\u9fcc]//
 
 -- 删除行尾空格
 -- vim.api.nvim_create_user_command('TrimTrailingWhitespaces', "<range>s/", {range = true})
+
+-- TODO
+-- retab, input tab size (like 2 -> 4), from expanded tabs (spaces) to tabs
+-- vim.api.nvim_create_user_command('Retab', function(opts)
+-- 	-- vim.opt_local.
+-- end, {
+-- 	nargs = 2,
+-- })

@@ -1,0 +1,2 @@
+-- conceal 的话, 编辑多行内容时会难以看清源码
+-- vim.opt_local.conceallevel = 2

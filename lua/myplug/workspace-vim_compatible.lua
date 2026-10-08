@@ -1,6 +1,7 @@
 vim.keymap.set('n', '<leader>ew', ':sp $ws/.vimrc.workspace<cr>')
 vim.keymap.set('n', '<leader>Ew', ':vs $ws/.vimrc.workspace<cr>')
-vim.keymap.set('n', '<leader>sw', ':source $ws/.vimrc.workspace<cr>')
+-- conflict with flash.nvim
+--vim.keymap.set('n', '<leader>sw', ':source $ws/.vimrc.workspace<cr>')
 
 vim.cmd([[
 if filereadable('.vimrc.workspace')

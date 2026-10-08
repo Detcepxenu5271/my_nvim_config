@@ -2,6 +2,7 @@
 -- vim.lsp.enable('vimls')
 -- vim.lsp.enable('clangd')
 
+-- TODO deprecated, nvim 0.12 use ":lsp enable"
 -- 创建 LspEnable 命令
 vim.api.nvim_create_user_command('LspEnable', function(opts)
 	local server_name = opts.args
